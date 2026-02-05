@@ -1,12 +1,33 @@
 name: Moon Image Agent
 
 on:
-  push:
-    branches: [ main ]
+  schedule:
+    - cron: "30 14 * * *"   # 8:00 PM IST (14:30 UTC)
   workflow_dispatch:
 
 jobs:
-  test:
+  run-agent:
     runs-on: ubuntu-latest
+
     steps:
-      - run: echo "Workflow is running"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Moon Agent
+        run: python moon_agent.py
+
+      - name: Commit image
+        run: |
+          git config user.name "moon-agent"
+          git config user.email "moon-agent@github"
+          git add moon_*.jpg
+          git commit -m "Daily Moon image" || echo "No changes to commit"
+          git push
