@@ -15,6 +15,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
           persist-credentials: true
 
       - name: Set up Python
@@ -30,6 +31,7 @@ jobs:
 
       - name: Commit image
         run: |
+          git status
           git config user.name "moon-agent"
           git config user.email "moon-agent@github"
           git add moon_*.jpg
