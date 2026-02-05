@@ -1,5 +1,8 @@
 name: Moon Image Agent
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: "30 14 * * *"   # 8:00 PM IST (14:30 UTC)
@@ -12,6 +15,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
