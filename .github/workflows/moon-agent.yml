@@ -24,8 +24,15 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
+      - name: Show files before run
+        run: ls -la
+      
       - name: Run Moon Agent
         run: python moon_agent.py
+
+      - name: Show files after run
+        run: ls -la
+
 
       - name: Commit image
         run: |
@@ -33,4 +40,5 @@ jobs:
           git config user.email "moon-agent@github"
           git add moon_*.jpg
           git commit -m "Daily Moon image" || echo "No changes to commit"
-          git push
+          git push origin HEAD:main
+
