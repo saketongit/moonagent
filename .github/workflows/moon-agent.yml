@@ -1,10 +1,36 @@
 name: Moon Image Agent
 
+permissions:
+  contents: write
+
 on:
+  schedule:
+    - cron: "30 14 * * *"
   workflow_dispatch:
 
 jobs:
-  test:
+  run-agent:
     runs-on: ubuntu-latest
+
     steps:
-      - run: echo "Clean workflow works"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Moon Agent
+        run: python moon_agent.py
+
+      - name: Commit image
+        run: |
+          git config user.name "moon-agent"
+          git config user.email "moon-agent@github"
+          git add moon_*.jpg
+          git commit -m "Daily Moon image" || echo "No changes to commit"
+          git push
