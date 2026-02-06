@@ -1,5 +1,7 @@
 import requests
 from datetime import date
+import shutil
+import os
 
 MOON_IMAGE_URL = (
     "https://svs.gsfc.nasa.gov/vis/a000000/a005500/"
@@ -15,6 +17,11 @@ response = requests.get(MOON_IMAGE_URL)
 if response.status_code == 200:
     with open(filename, "wb") as f:
         f.write(response.content)
+
+    os.makedirs("docs", exist_ok=True)
+    shutil.copyfile(filename, "docs/latest.jpg")
+
     print("Saved:", filename)
+    print("Updated docs/latest.jpg")
 else:
     raise Exception(f"Failed with status {response.status_code}")
