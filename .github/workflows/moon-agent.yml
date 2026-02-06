@@ -37,6 +37,6 @@ jobs:
         run: |
           git config user.name "moon-agent"
           git config user.email "moon-agent@github"
-          git add images/*.jpg index.html
+          git add images/*.jpg gallery.json index.html
           git commit -m "Daily Moon image" || echo "No changes to commit"
           git push origin HEAD:main
