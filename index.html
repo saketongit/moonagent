@@ -8,21 +8,73 @@
       font-family: system-ui, sans-serif;
       text-align: center;
       background: #000000;
-      color: #fff;
+      color: #ffffff;
+      margin: 0;
+      padding: 40px 20px;
     }
-    img {
+
+    h1 {
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .hero {
       max-width: 90%;
-      margin-top: 20px;
+      margin: 30px auto 60px;
       border-radius: 12px;
+    }
+
+    .gallery-title {
+      margin-top: 60px;
+      margin-bottom: 20px;
+      opacity: 0.8;
+      font-size: 18px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .gallery-item img {
+      max-width: 300px;
+      border-radius: 8px;
+    }
+
+    .date {
+      margin-top: 8px;
+      font-size: 14px;
+      opacity: 0.7;
     }
   </style>
 </head>
 <body>
 
   <h1>Moon Today 🌙</h1>
-  <p>Automatically updated every day</p>
+  <p>be here 8 PM everyday</p>
 
-  <img src="images/latest.jpg" alt="Moon image">
+  <!-- Hero image -->
+  <img class="hero" src="images/latest.jpg" alt="Moon today">
+
+  <!-- Gallery -->
+  <div class="gallery-title">Previous days</div>
+
+  <div class="gallery">
+
+    <!-- Example entries (we will automate this later) -->
+    <div class="gallery-item">
+      <img src="images/moon_2026-02-05.jpg" alt="Moon 2026-02-05">
+      <div class="date">2026-02-05</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="images/moon_2026-02-04.jpg" alt="Moon 2026-02-04">
+      <div class="date">2026-02-04</div>
+    </div>
+
+  </div>
 
 </body>
 </html>
