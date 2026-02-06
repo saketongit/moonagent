@@ -19,7 +19,7 @@ if response.status_code == 200:
         f.write(response.content)
 
     os.makedirs("docs", exist_ok=True)
-    shutil.copyfile(filename, "docs/latest.jpg")
+    git add moon_*.jpg latest.jpg index.html
 
     print("Saved:", filename)
     print("Updated docs/latest.jpg")
