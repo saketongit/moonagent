@@ -5,7 +5,7 @@ permissions:
 
 on:
   schedule:
-    - cron: "30 14 * * *"
+    - cron: "30 14 * * *"   # 8:00 PM IST
   workflow_dispatch:
 
 jobs:
@@ -26,19 +26,17 @@ jobs:
 
       - name: Show files before run
         run: ls -la
-      
+
       - name: Run Moon Agent
         run: python moon_agent.py
 
       - name: Show files after run
-        run: ls -la
-
+        run: ls -la images
 
       - name: Commit image
         run: |
           git config user.name "moon-agent"
           git config user.email "moon-agent@github"
-          git add moon_*.jpg
+          git add images/*.jpg index.html
           git commit -m "Daily Moon image" || echo "No changes to commit"
           git push origin HEAD:main
-
