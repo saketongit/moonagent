@@ -2,32 +2,66 @@ import requests
 from datetime import date
 import shutil
 import os
+import json
 
 MOON_IMAGE_URL = (
     "https://svs.gsfc.nasa.gov/vis/a000000/a005500/"
     "a005587/frames/730x730_1x1_30p/moon.0868.jpg"
 )
 
+# Config
+MAX_ENTRIES = 14
+IMAGES_DIR = "images"
+GALLERY_FILE = "gallery.json"
+
 today = date.today().isoformat()
-daily_filename = f"moon_{today}.jpg"
+daily_name = f"moon_{today}.jpg"
+daily_path = os.path.join(IMAGES_DIR, daily_name)
+latest_path = os.path.join(IMAGES_DIR, "latest.jpg")
 
 # Ensure images folder exists
-os.makedirs("images", exist_ok=True)
-
-daily_path = os.path.join("images", daily_filename)
-latest_path = os.path.join("images", "latest.jpg")
+os.makedirs(IMAGES_DIR, exist_ok=True)
 
 print("Downloading Moon image...")
 response = requests.get(MOON_IMAGE_URL)
 
 if response.status_code == 200:
-    with open(daily_path, "wb") as f:
-        f.write(response.content)
-
-    # Update latest.jpg
-    shutil.copyfile(daily_path, latest_path)
-
-    print("Saved:", daily_path)
-    print("Updated:", latest_path)
-else:
     raise Exception(f"Failed with status {response.status_code}")
+
+# Save daily image
+with open(daily_path, "wb") as f:
+    f.write(response.content)
+
+# Update latest
+shutil.copyfile(daily_path, latest_path)
+
+print("Saved:", daily_path)
+print("Updated:", latest_path)
+
+# Load or initialize gallery.json
+if os.path.exists(GALLERY_FILE):
+    with open(GALLERY_FILE, "r", encoding="utf-8") as f:
+        gallery = json.load(f)
+else:
+    gallery = {"updated_at": today, "images": []}
+
+# Remove today if it already exists (idempotent runs)
+gallery["images"] = [
+    item for item in gallery["images"] if item["date"] != today
+]
+
+# Prepend today
+gallery["images"].insert(0, {
+    "date": today,
+    "file": daily_path.replace("\\", "/")
+})
+
+# Trim to MAX_ENTRIES
+gallery["images"] = gallery["images"][:MAX_ENTRIES]
+gallery["updated_at"] = today
+
+# Save gallery.json
+with open(GALLERY_FILE, "w", encoding="utf-8") as f:
+    json.dump(gallery, f, indent=2)
+
+print("Updated gallery.json")
