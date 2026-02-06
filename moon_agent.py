@@ -25,7 +25,7 @@ os.makedirs(IMAGES_DIR, exist_ok=True)
 print("Downloading Moon image...")
 response = requests.get(MOON_IMAGE_URL)
 
-if response.status_code == 200:
+if response.status_code != 200:
     raise Exception(f"Failed with status {response.status_code}")
 
 # Save daily image
