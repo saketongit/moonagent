@@ -3,7 +3,10 @@
   "images": [
     {
       "date": "2026-02-06",
-      "file": "images/moon_2026-02-06.jpg"
+      "file": "images/moon_2026-02-06.jpg",
+      "phase": "Waning Gibbous",
+      "illumination": 71.0,
+      "age_days": 20.1
     },
     {
       "date": "2026-02-08",
