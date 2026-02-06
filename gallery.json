@@ -1,6 +1,10 @@
 {
-  "updated_at": "2026-02-08",
+  "updated_at": "2026-02-06",
   "images": [
+    {
+      "date": "2026-02-06",
+      "file": "images/moon_2026-02-06.jpg"
+    },
     {
       "date": "2026-02-08",
       "file": "images/moon_2026-02-08.jpg"
