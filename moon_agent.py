@@ -9,19 +9,25 @@ MOON_IMAGE_URL = (
 )
 
 today = date.today().isoformat()
-filename = f"moon_{today}.jpg"
+daily_filename = f"moon_{today}.jpg"
+
+# Ensure images folder exists
+os.makedirs("images", exist_ok=True)
+
+daily_path = os.path.join("images", daily_filename)
+latest_path = os.path.join("images", "latest.jpg")
 
 print("Downloading Moon image...")
 response = requests.get(MOON_IMAGE_URL)
 
 if response.status_code == 200:
-    with open(filename, "wb") as f:
+    with open(daily_path, "wb") as f:
         f.write(response.content)
 
-    os.makedirs("docs", exist_ok=True)
-    git add moon_*.jpg latest.jpg index.html
+    # Update latest.jpg
+    shutil.copyfile(daily_path, latest_path)
 
-    print("Saved:", filename)
-    print("Updated docs/latest.jpg")
+    print("Saved:", daily_path)
+    print("Updated:", latest_path)
 else:
     raise Exception(f"Failed with status {response.status_code}")
