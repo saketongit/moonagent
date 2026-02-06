@@ -99,8 +99,12 @@ gallery["images"] = [
 # Prepend today
 gallery["images"].insert(0, {
     "date": today,
-    "file": daily_path.replace("\\", "/")
+    "file": daily_path.replace("\\", "/"),
+    "phase": phase,
+    "illumination": illum_pct,
+    "age_days": age_days
 })
+
 
 # Trim to MAX_ENTRIES
 gallery["images"] = gallery["images"][:MAX_ENTRIES]
