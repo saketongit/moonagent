@@ -52,6 +52,21 @@ MAX_ENTRIES = 14
 IMAGES_DIR = "images"
 GALLERY_FILE = "gallery.json"
 
+# Compute diff from yesterday (if available)
+diff = None
+
+if gallery["images"]:
+    yesterday = gallery["images"][0]
+
+    diff = {
+        "illumination_delta": round(
+            illum_pct - yesterday.get("illumination", 0), 1
+        ),
+        "age_delta": round(
+            age_days - yesterday.get("age_days", 0), 1),
+        "phase_changed": phase != yesterday.get("phase")
+    }
+
 today = date.today().isoformat()
 today_dt = datetime.utcnow()
 age = moon_age(today_dt)
@@ -103,6 +118,7 @@ gallery["images"].insert(0, {
     "phase": phase,
     "illumination": illum_pct,
     "age_days": age_days
+    "diff": diff
 })
 
 
