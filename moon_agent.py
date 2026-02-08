@@ -46,26 +46,28 @@ def phase_name(age):
 NASA_MOON_PAGE = "https://science.nasa.gov/moon/daily-moon-guide/"
 
 def get_today_moon_image_url():
-    """
-    Fetch NASA's Daily Moon Guide page and extract the
-    largest-resolution Moon image URL used today.
-    """
     response = requests.get(NASA_MOON_PAGE, timeout=20)
     response.raise_for_status()
 
     html = response.text
 
-    pattern = re.compile(
-        r"https://svs\.gsfc\.nasa\.gov/[^\"']+/moon\.\d+\.jpg"
+    # 1️⃣ Try OpenGraph image (most reliable)
+    og_match = re.search(
+        r'<meta property="og:image" content="([^"]+moon\.\d+\.jpg)"',
+        html
     )
+    if og_match:
+        return og_match.group(1)
 
-    matches = pattern.findall(html)
+    # 2️⃣ Fallback: first large moon image in page
+    img_match = re.search(
+        r'<img[^>]+src="([^"]+moon\.\d+\.jpg)"',
+        html
+    )
+    if img_match:
+        return img_match.group(1)
 
-    if not matches:
-        raise Exception("No Moon image URLs found on NASA page")
-
-    matches = sorted(set(matches), key=len, reverse=True)
-    return matches[0]
+    raise Exception("Could not determine today's Moon image")
 
 
 
