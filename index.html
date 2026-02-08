@@ -60,15 +60,37 @@
 
   <!-- Gallery -->
 
-  <div class="gallery">
+  <div class="gallery" id="gallery"></div>
 
-    <!-- Example entries (we will automate this later) -->
-    <div class="gallery-item">
-      <img src="images/moon_2026-02-05.jpg" alt="Moon 2026-02-05">
-      <div class="date">2026-02-05</div>
-    </div>
+  <script>
+  fetch("gallery.json")
+    .then(response => response.json())
+    .then(data => {
+      const galleryEl = document.getElementById("gallery");
 
-  </div>
+      data.images.forEach(item => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "gallery-item";
+
+        const img = document.createElement("img");
+        img.src = item.file;
+        img.alt = "Moon " + item.date;
+
+        const date = document.createElement("div");
+        date.className = "date";
+        date.textContent = item.date;
+
+        wrapper.appendChild(img);
+        wrapper.appendChild(date);
+        galleryEl.appendChild(wrapper);
+       });
+    })
+    .catch(err => {
+      console.error("Failed to load gallery.json", err);
+    });
+ </script>
+
+
 
 </body>
 </html>
