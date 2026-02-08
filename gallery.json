@@ -5,11 +5,11 @@
       "date": "2026-02-08",
       "file": "images/moon_2026-02-08.jpg",
       "phase": "Last Quarter",
-      "illumination": 51.7,
+      "illumination": 51.1,
       "age_days": 22.0,
       "diff": {
-        "illumination_delta": -2.3,
-        "age_delta": 0.2,
+        "illumination_delta": -0.6,
+        "age_delta": 0.0,
         "phase_changed": false
       }
     },
