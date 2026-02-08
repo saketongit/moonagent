@@ -1,6 +1,13 @@
 {
-  "updated_at": "2026-02-07",
+  "updated_at": "2026-02-08",
   "images": [
+    {
+      "date": "2026-02-08",
+      "file": "images/moon_2026-02-08.jpg",
+      "phase": "Last Quarter",
+      "illumination": 54.0,
+      "age_days": 21.8
+    },
     {
       "date": "2026-02-07",
       "file": "images/moon_2026-02-07.jpg",
@@ -14,10 +21,6 @@
       "phase": "Waning Gibbous",
       "illumination": 71.0,
       "age_days": 20.1
-    },
-    {
-      "date": "2026-02-08",
-      "file": "images/moon_2026-02-08.jpg"
     }
   ]
 }
