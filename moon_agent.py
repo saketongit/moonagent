@@ -3,6 +3,8 @@ from datetime import date
 import shutil
 import os
 import json
+import re
+
 
 from math import cos, pi
 from datetime import datetime
@@ -41,11 +43,36 @@ def phase_name(age):
     else:
         return "New Moon"
 
+NASA_MOON_PAGE = "https://science.nasa.gov/moon/daily-moon-guide/"
 
-MOON_IMAGE_URL = (
-    "https://svs.gsfc.nasa.gov/vis/a000000/a005500/"
-    "a005587/frames/730x730_1x1_30p/moon.0868.jpg"
-)
+def get_today_moon_image_url():
+    """
+    Fetch NASA's Daily Moon Guide page and extract the
+    largest-resolution Moon image URL used today.
+    """
+    response = requests.get(NASA_MOON_PAGE, timeout=20)
+    response.raise_for_status()
+
+    html = response.text
+
+    pattern = re.compile(
+        r"https://svs\.gsfc\.nasa\.gov/[^\"']+/moon\.\d+\.jpg"
+    )
+
+    matches = pattern.findall(html)
+
+    if not matches:
+        raise Exception("No Moon image URLs found on NASA page")
+
+    matches = sorted(set(matches), key=len, reverse=True)
+    return matches[0]
+
+
+
+print("Fetching today's Moon image URL from NASA...")
+MOON_IMAGE_URL = get_today_moon_image_url()
+print("Using Moon image:", MOON_IMAGE_URL)
+
 
 # Config
 MAX_ENTRIES = 14
