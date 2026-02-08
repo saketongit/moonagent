@@ -3,11 +3,18 @@ from datetime import date
 import shutil
 import os
 import json
-import re
 
 
 from math import cos, pi
 from datetime import datetime
+
+REFERENCE_DATE = date(2026, 2, 9)
+REFERENCE_FRAME = 939
+
+FRAME_BASE_URL = (
+    "https://svs.gsfc.nasa.gov/vis/a000000/a005500/"
+    "a005587/frames/730x730_1x1_30p/"
+)
 
 SYNODIC_MONTH = 29.53058867
 KNOWN_NEW_MOON = datetime(2000, 1, 6)  # reference new moon
@@ -43,37 +50,19 @@ def phase_name(age):
     else:
         return "New Moon"
 
-NASA_MOON_PAGE = "https://science.nasa.gov/moon/daily-moon-guide/"
 
-def get_today_moon_image_url():
-    response = requests.get(NASA_MOON_PAGE, timeout=20)
-    response.raise_for_status()
-
-    html = response.text
-
-    # 1️⃣ Try OpenGraph image (most reliable)
-    og_match = re.search(
-        r'<meta property="og:image" content="([^"]+moon\.\d+\.jpg)"',
-        html
-    )
-    if og_match:
-        return og_match.group(1)
-
-    # 2️⃣ Fallback: first large moon image in page
-    img_match = re.search(
-        r'<img[^>]+src="([^"]+moon\.\d+\.jpg)"',
-        html
-    )
-    if img_match:
-        return img_match.group(1)
-
-    raise Exception("Could not determine today's Moon image")
+def get_frame_for_date(target_date):
+    delta_days = (target_date - REFERENCE_DATE).days
+    return REFERENCE_FRAME + delta_days
 
 
+def get_moon_image_url_for_date(target_date):
+    frame = get_frame_for_date(target_date)
 
-print("Fetching today's Moon image URL from NASA...")
-MOON_IMAGE_URL = get_today_moon_image_url()
-print("Using Moon image:", MOON_IMAGE_URL)
+    if frame < 1:
+        raise ValueError("Invalid frame number")
+
+    return f"{FRAME_BASE_URL}moon.{frame:04d}.jpg"
 
 
 # Config
@@ -83,6 +72,9 @@ GALLERY_FILE = "gallery.json"
 
 today = date.today().isoformat()
 today_dt = datetime.utcnow()
+print("Computing today's Moon image via frame math...")
+MOON_IMAGE_URL = get_moon_image_url_for_date(date.today())
+print("Using Moon image:", MOON_IMAGE_URL)
 age = moon_age(today_dt)
 illum = illumination(age)
 phase = phase_name(age)
