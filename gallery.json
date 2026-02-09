@@ -1,6 +1,18 @@
 {
-  "updated_at": "2026-02-08",
+  "updated_at": "2026-02-09",
   "images": [
+    {
+      "date": "2026-02-09",
+      "file": "images/moon_2026-02-09.jpg",
+      "phase": "Last Quarter",
+      "illumination": 43.1,
+      "age_days": 22.8,
+      "diff": {
+        "illumination_delta": -8.0,
+        "age_delta": 0.8,
+        "phase_changed": false
+      }
+    },
     {
       "date": "2026-02-08",
       "file": "images/moon_2026-02-08.jpg",
