@@ -5,7 +5,8 @@ permissions:
 
 on:
   schedule:
-    - cron: "30 14 * * *"   # 8:00 PM IST
+    schedule:
+  - cron: "0 */6 * * *"   # every 6 hours UTC
   workflow_dispatch:
 
 jobs:
@@ -37,6 +38,6 @@ jobs:
         run: |
           git config user.name "moon-agent"
           git config user.email "moon-agent@github"
-          git add images/*.jpg gallery.json index.html
-          git commit -m "Daily Moon image" || echo "No changes to commit"
-          git push origin HEAD:main
+          git add images/*.jpg gallery.json
+          git commit -m "Moon update (slot-based)" || echo "No changes to commit"
+          git push
