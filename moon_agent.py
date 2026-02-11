@@ -144,50 +144,51 @@ shutil.copyfile(daily_path, latest_path)
 print("Saved:", daily_path)
 print("Updated:", latest_path)
 
-# Load or initialize gallery.json
-if os.path.exists(GALLERY_FILE):
-    with open(GALLERY_FILE, "r", encoding="utf-8") as f:
-        gallery = json.load(f)
+if IS_DAILY_ARCHIVE_SLOT:
+
+    # Load or initialize gallery.json
+    if os.path.exists(GALLERY_FILE):
+        with open(GALLERY_FILE, "r", encoding="utf-8") as f:
+            gallery = json.load(f)
+    else:
+        gallery = {"updated_at": today, "images": []}
+
+    # Compute diff from yesterday (if available)
+    diff = None
+    if gallery["images"]:
+        yesterday = gallery["images"][0]
+        diff = {
+            "illumination_delta": round(
+                illum_pct - yesterday.get("illumination", 0), 1
+            ),
+            "age_delta": round(
+                age_days - yesterday.get("age_days", 0), 1),
+            "phase_changed": phase != yesterday.get("phase")
+        }
+
+    # Remove today if it already exists
+    gallery["images"] = [
+        item for item in gallery["images"] if item["date"] != today
+    ]
+
+    # Prepend today
+    gallery["images"].insert(0, {
+        "date": today,
+        "file": daily_path.replace("\\", "/"),
+        "phase": phase,
+        "illumination": illum_pct,
+        "age_days": age_days,
+        "diff": diff
+    })
+
+    # Trim & save
+    gallery["images"] = gallery["images"][:MAX_ENTRIES]
+    gallery["updated_at"] = today
+
+    with open(GALLERY_FILE, "w", encoding="utf-8") as f:
+        json.dump(gallery, f, indent=2)
+
+    print("Archived daily snapshot in gallery.json")
+
 else:
-    gallery = {"updated_at": today, "images": []}
-
-# Compute diff from yesterday (if available)
-diff = None
-
-if gallery["images"]:
-    yesterday = gallery["images"][0]
-
-    diff = {
-        "illumination_delta": round(
-            illum_pct - yesterday.get("illumination", 0), 1
-        ),
-        "age_delta": round(
-            age_days - yesterday.get("age_days", 0), 1),
-        "phase_changed": phase != yesterday.get("phase")
-    }
-
-# Remove today if it already exists (idempotent runs)
-gallery["images"] = [
-    item for item in gallery["images"] if item["date"] != today
-]
-
-# Prepend today
-gallery["images"].insert(0, {
-    "date": today,
-    "file": daily_path.replace("\\", "/"),
-    "phase": phase,
-    "illumination": illum_pct,
-    "age_days": age_days,
-    "diff": diff
-})
-
-
-# Trim to MAX_ENTRIES
-gallery["images"] = gallery["images"][:MAX_ENTRIES]
-gallery["updated_at"] = today
-
-# Save gallery.json
-with open(GALLERY_FILE, "w", encoding="utf-8") as f:
-    json.dump(gallery, f, indent=2)
-
-print("Updated gallery.json")
+    print("Not an archive slot — gallery not updated")
