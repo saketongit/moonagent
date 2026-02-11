@@ -37,10 +37,6 @@ def svs_frame_index(slot_dt: datetime) -> int:
     return hour_of_year(slot_dt) + SVS_FRAME_OFFSET
 
 
-hour_index = hour_of_year(slot_dt)
-print("Hour-of-year index:", hour_index)
-
-
 def get_moon_image_url_for_slot(slot_dt: datetime) -> str:
     """
     Returns the SVS image URL for a given 6-hour slot datetime.
@@ -102,6 +98,8 @@ slot_dt = get_latest_completed_slot(now_utc)
 
 slot_date_str = slot_dt.date().isoformat()
 slot_hour = slot_dt.hour
+hour_index = hour_of_year(slot_dt)
+print("Hour-of-year index:", hour_index)
 
 IS_DAILY_ARCHIVE_SLOT = (slot_hour == 18)
 
