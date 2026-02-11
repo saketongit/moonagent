@@ -181,8 +181,7 @@ if IS_DAILY_ARCHIVE_SLOT:
         "diff": diff
     })
 
-    # Trim & save
-    gallery["images"] = gallery["images"][:MAX_ENTRIES]
+    # Keep full history (no trimming)
     gallery["updated_at"] = today
 
     with open(GALLERY_FILE, "w", encoding="utf-8") as f:
