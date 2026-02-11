@@ -1,15 +1,61 @@
 import requests
-from datetime import date
+from datetime import datetime, date
 import shutil
 import os
 import json
-
-
 from math import cos, pi
-from datetime import datetime
+SVS_FRAME_OFFSET = 0
 
-REFERENCE_DATE = date(2026, 2, 9)
-REFERENCE_FRAME = 939
+
+
+def get_latest_completed_slot(now_utc: datetime) -> datetime:
+    """
+    Returns the latest completed 6-hour UTC slot as a datetime.
+    Slots: 00, 06, 12, 18
+    """
+    slot_hour = (now_utc.hour // 6) * 6
+    return now_utc.replace(
+        hour=slot_hour,
+        minute=0,
+        second=0,
+        microsecond=0
+    )
+
+now_utc = datetime.utcnow()
+slot_dt = get_latest_completed_slot(now_utc)
+
+slot_date_str = slot_dt.date().isoformat()
+slot_hour = slot_dt.hour
+
+print("Observation slot:", slot_date_str, f"{slot_hour:02d}:00 UTC")
+
+def hour_of_year(dt: datetime) -> int:
+    """
+    Returns 0-based hour index since Jan 1, 00:00 UTC of the same year.
+    """
+    start_of_year = datetime(dt.year, 1, 1)
+    delta = dt - start_of_year
+    return int(delta.total_seconds() // 3600)
+
+def svs_frame_index(slot_dt: datetime) -> int:
+    """
+    Maps a UTC slot datetime to the correct SVS hourly frame index.
+    """
+    return hour_of_year(slot_dt) + SVS_FRAME_OFFSET
+
+
+hour_index = hour_of_year(slot_dt)
+print("Hour-of-year index:", hour_index)
+
+
+def get_moon_image_url_for_slot(slot_dt: datetime) -> str:
+    """
+    Returns the SVS image URL for a given 6-hour slot datetime.
+    """
+    frame = svs_frame_index(slot_dt)
+    return f"{FRAME_BASE_URL}moon.{frame:04d}.jpg"
+
+
 
 FRAME_BASE_URL = (
     "https://svs.gsfc.nasa.gov/vis/a000000/a005500/"
@@ -51,18 +97,6 @@ def phase_name(age):
         return "New Moon"
 
 
-def get_frame_for_date(target_date):
-    delta_days = (target_date - REFERENCE_DATE).days
-    return REFERENCE_FRAME + delta_days
-
-
-def get_moon_image_url_for_date(target_date):
-    frame = get_frame_for_date(target_date)
-
-    if frame < 1:
-        raise ValueError("Invalid frame number")
-
-    return f"{FRAME_BASE_URL}moon.{frame:04d}.jpg"
 
 
 # Config
@@ -70,11 +104,17 @@ MAX_ENTRIES = 14
 IMAGES_DIR = "images"
 GALLERY_FILE = "gallery.json"
 
-today = date.today().isoformat()
-today_dt = datetime.utcnow()
+now_utc = datetime.utcnow()
+slot_dt = get_latest_completed_slot(now_utc)
+
+slot_date_str = slot_dt.date().isoformat()
+slot_hour = slot_dt.hour
+
 print("Computing today's Moon image via frame math...")
-MOON_IMAGE_URL = get_moon_image_url_for_date(date.today())
+MOON_IMAGE_URL = get_moon_image_url_for_slot(slot_dt)
 print("Using Moon image:", MOON_IMAGE_URL)
+today_dt = slot_dt
+today = slot_dt.date().isoformat()
 age = moon_age(today_dt)
 illum = illumination(age)
 phase = phase_name(age)
