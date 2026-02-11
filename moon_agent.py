@@ -21,13 +21,6 @@ def get_latest_completed_slot(now_utc: datetime) -> datetime:
         microsecond=0
     )
 
-now_utc = datetime.utcnow()
-slot_dt = get_latest_completed_slot(now_utc)
-
-slot_date_str = slot_dt.date().isoformat()
-slot_hour = slot_dt.hour
-
-print("Observation slot:", slot_date_str, f"{slot_hour:02d}:00 UTC")
 
 def hour_of_year(dt: datetime) -> int:
     """
@@ -109,8 +102,13 @@ slot_dt = get_latest_completed_slot(now_utc)
 
 slot_date_str = slot_dt.date().isoformat()
 slot_hour = slot_dt.hour
+
 IS_DAILY_ARCHIVE_SLOT = (slot_hour == 18)
+
+print("Observation slot:", slot_date_str, f"{slot_hour:02d}:00 UTC")
 print("Daily archive slot:", IS_DAILY_ARCHIVE_SLOT)
+
+
 
 
 print("Computing today's Moon image via frame math...")
