@@ -109,6 +109,9 @@ slot_dt = get_latest_completed_slot(now_utc)
 
 slot_date_str = slot_dt.date().isoformat()
 slot_hour = slot_dt.hour
+IS_DAILY_ARCHIVE_SLOT = (slot_hour == 18)
+print("Daily archive slot:", IS_DAILY_ARCHIVE_SLOT)
+
 
 print("Computing today's Moon image via frame math...")
 MOON_IMAGE_URL = get_moon_image_url_for_slot(slot_dt)
