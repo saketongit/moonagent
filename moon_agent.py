@@ -121,7 +121,7 @@ phase = phase_name(age)
 illum_pct = round(illum * 100, 1)
 age_days = round(age, 1)
 
-daily_name = f"moon_{today}.jpg"
+daily_name = f"moon_{today}_{slot_hour:02d}.jpg"
 daily_path = os.path.join(IMAGES_DIR, daily_name)
 latest_path = os.path.join(IMAGES_DIR, "latest.jpg")
 
@@ -189,6 +189,19 @@ if IS_DAILY_ARCHIVE_SLOT:
         json.dump(gallery, f, indent=2)
 
     print("Archived daily snapshot in gallery.json")
+    print("Running same-day cleanup...")
+
+    for filename in os.listdir(IMAGES_DIR):
+        if not filename.startswith(f"moon_{today}_"):
+            continue
+
+        if filename == f"moon_{today}_18.jpg":
+            continue  # keep canonical image
+
+        file_path = os.path.join(IMAGES_DIR, filename)
+        os.remove(file_path)
+        print("Deleted:", filename)
+
 
 else:
     print("Not an archive slot — gallery not updated")
