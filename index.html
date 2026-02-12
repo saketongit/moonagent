@@ -62,13 +62,63 @@
 
   <div class="gallery" id="gallery"></div>
 
-  <script>
-  fetch("gallery.json")
-    .then(response => response.json())
-    .then(data => {
-      const galleryEl = document.getElementById("gallery");
+  .month-divider {
+  margin: 40px 0;
+  font-size: 18px;
+  opacity: 0.8;
+  cursor: pointer;
+  user-select: none;
+}
 
-      data.images.forEach(item => {
+.month-divider:hover {
+  opacity: 1;
+}
+
+.month-section {
+  display: none;
+}
+
+.month-section.active {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+
+<script>
+fetch("gallery.json")
+  .then(response => response.json())
+  .then(data => {
+    const galleryEl = document.getElementById("gallery");
+
+    // 1️⃣ Group images by month (YYYY-MM)
+    const months = {};
+    data.images.forEach(item => {
+      const monthKey = item.date.slice(0, 7); // "2026-02"
+      if (!months[monthKey]) {
+        months[monthKey] = [];
+      }
+      months[monthKey].push(item);
+    });
+
+    // 2️⃣ Sort months descending (latest first)
+    const sortedMonths = Object.keys(months).sort().reverse();
+
+    let activeMonth = sortedMonths[0]; // latest month
+
+    sortedMonths.forEach((monthKey, index) => {
+      // Create month section
+      const section = document.createElement("div");
+      section.className = "month-section";
+      section.dataset.month = monthKey;
+
+      if (monthKey === activeMonth) {
+        section.classList.add("active");
+      }
+
+      // Add images for this month
+      months[monthKey].forEach(item => {
         const wrapper = document.createElement("div");
         wrapper.className = "gallery-item";
 
@@ -82,8 +132,39 @@
 
         wrapper.appendChild(img);
         wrapper.appendChild(date);
-        galleryEl.appendChild(wrapper);
-       });
+        section.appendChild(wrapper);
+      });
+
+      galleryEl.appendChild(section);
+
+      // Add divider (except after last month)
+      if (index < sortedMonths.length - 1) {
+        const divider = document.createElement("div");
+        divider.className = "month-divider";
+
+        const [year, month] = monthKey.split("-");
+        const label = new Date(year, month - 1)
+          .toLocaleString("default", { month: "long", year: "numeric" });
+
+        divider.textContent = label + " ▸";
+
+        divider.addEventListener("click", () => {
+          document.querySelectorAll(".month-section").forEach(sec => {
+            sec.classList.remove("active");
+          });
+
+          section.classList.add("active");
+          section.scrollIntoView({ behavior: "smooth" });
+        });
+
+        galleryEl.appendChild(divider);
+      }
+    });
+  })
+  .catch(err => {
+    console.error("Failed to load gallery.json", err);
+  });
+</script>
     })
     .catch(err => {
       console.error("Failed to load gallery.json", err);
