@@ -65,6 +65,58 @@
     .month-divider:hover {
       opacity: 1;
     }
+
+    /* Floating Month Selector */
+    .month-selector {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      font-size: 14px;
+    }
+
+    .month-selector-label {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+
+    .month-selector-label:hover {
+      opacity: 1;
+    }
+
+    .month-selector-menu {
+      display: none;
+      margin-top: 8px;
+      background: rgba(0, 0, 0, 0.85);
+      border-radius: 12px;
+      padding: 6px 0;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+
+    .month-selector-menu.active {
+      display: block;
+    }
+
+    .month-selector-item {
+      padding: 8px 16px;
+      cursor: pointer;
+      opacity: 0.6;
+    }
+
+    .month-selector-item:hover {
+      opacity: 1;
+    }
+
+    .month-selector-item.active {
+      opacity: 1;
+      font-weight: 500;
+    }
   </style>
 </head>
 
@@ -94,6 +146,59 @@
         // Sort months (latest first)
         const monthKeys = Object.keys(months).sort().reverse();
         let activeMonth = monthKeys[0];
+        // Floating month selector elements
+        const selector = document.getElementById("month-selector");
+        const selectorLabel = document.getElementById("month-selector-label");
+        const selectorMenu = document.getElementById("month-selector-menu");
+
+        // Helper: format month label
+        function formatMonth(key) {
+          const [y, m] = key.split("-");
+          return new Date(y, m - 1).toLocaleString("default", {
+            month: "long",
+            year: "numeric"
+          });
+        }
+
+        // Set initial label
+        selectorLabel.textContent = formatMonth(activeMonth) + " ▾";
+
+        // Build selector menu
+        monthKeys.forEach(key => {
+          const item = document.createElement("div");
+          item.className = "month-selector-item";
+          item.textContent = formatMonth(key);
+
+          if (key === activeMonth) {
+            item.classList.add("active");
+          }
+
+          item.addEventListener("click", () => {
+            // Switch active month
+            document.querySelectorAll(".month-section")
+              .forEach(sec => sec.classList.remove("active"));
+
+            document
+              .querySelector(`.month-section[data-month="${key}"]`)
+              .classList.add("active");
+
+            // Update selector UI
+            selectorLabel.textContent = formatMonth(key) + " ▾";
+            document.querySelectorAll(".month-selector-item")
+              .forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
+
+            selectorMenu.classList.remove("active");
+          });
+
+          selectorMenu.appendChild(item);
+        });
+
+        // Toggle menu open/close
+        selectorLabel.addEventListener("click", () => {
+          selectorMenu.classList.toggle("active");
+        });
+
 
         monthKeys.forEach((monthKey, index) => {
           const section = document.createElement("div");
@@ -149,6 +254,16 @@
       })
       .catch(err => console.error("Failed to load gallery.json", err));
   </script>
+
+
+<!-- Floating Month Selector -->
+<div id="month-selector" class="month-selector">
+  <div id="month-selector-label" class="month-selector-label">
+    Month ▾
+  </div>
+  <div id="month-selector-menu" class="month-selector-menu"></div>
+</div>
+
 
 </body>
 </html>
