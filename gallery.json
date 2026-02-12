@@ -1,6 +1,18 @@
 {
-  "updated_at": "2026-02-11",
+  "updated_at": "2026-02-12",
   "images": [
+    {
+      "date": "2026-02-12",
+      "file": "images/moon_2026-02-12_18.jpg",
+      "phase": "Waning Crescent",
+      "illumination": 14.2,
+      "age_days": 25.9,
+      "diff": {
+        "illumination_delta": -8.2,
+        "age_delta": 1.0,
+        "phase_changed": false
+      }
+    },
     {
       "date": "2026-02-11",
       "file": "images/moon_2026-02-11.jpg",
@@ -17,7 +29,7 @@
       "age_days": 23.9,
       "diff": null
     },
-	{
+    {
       "date": "2026-02-09",
       "file": "images/moon_2026-02-09.jpg",
       "phase": "Last Quarter",
@@ -39,7 +51,7 @@
         "illumination_delta": -0.6,
         "age_delta": 0.0,
         "phase_changed": false
-	  }
+      }
     },
     {
       "date": "2026-02-07",
@@ -54,7 +66,6 @@
       "file": "images/moon_2026-02-06.jpg",
       "phase": "Waning Gibbous",
       "illumination": 71.0,
-      "age_days": 20.1,
       "age_days": 19.9,
       "diff": null
     },
