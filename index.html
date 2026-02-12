@@ -43,28 +43,26 @@
 
     /* Month accordion */
     .month-section {
-      display: flex;
+      display: none;
       flex-direction: column;
       gap: 20px;
       align-items: center;
-
-      /* animation base state */
-      opacity: 0;
-      transform: translateY(7px);
-      pointer-events: none;
-      position: absolute;
-      left: 0;
-      right: 0;
     }
 
     .month-section.active {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-      position: relative;
+      display: flex;
+      animation: monthFadeIn 0.6s ease forwards;
+    }
 
-      /* ✅ Animate only the incoming month */
-      transition: opacity 0.6s ease, transform 0.6s ease;
+    @keyframes monthFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(7px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .month-divider {
