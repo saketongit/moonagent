@@ -43,14 +43,28 @@
 
     /* Month accordion */
     .month-section {
-      display: none;
+      display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 20px;
       align-items: center;
+
+      /* animation base state */
+      opacity: 0;
+      transform: translateY(7px);
+      pointer-events: none;
+      position: absolute;
+      left: 0;
+      right: 0;
     }
 
     .month-section.active {
-      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      position: relative;
+
+      /* ✅ Animate only the incoming month */
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
     .month-divider {
@@ -195,9 +209,14 @@
             document.querySelectorAll(".month-section")
               .forEach(sec => sec.classList.remove("active"));
 
-            document
-              .querySelector(`.month-section[data-month="${key}"]`)
-              .classList.add("active");
+            const nextSection = document.querySelector(
+              `.month-section[data-month="${key}"]`
+            );
+            
+            // force reflow so animation plays
+            nextSection.offsetHeight;
+
+            nextSection.classList.add("active");
 
             // Update selector UI
             selectorLabel.textContent = formatMonth(key) + " ▾";
@@ -257,12 +276,20 @@
             divider.textContent = label + " ▸";
 
             divider.addEventListener("click", () => {
+              // Remove active from all months
               document.querySelectorAll(".month-section")
                 .forEach(sec => sec.classList.remove("active"));
 
-              document
-                .querySelector(`.month-section[data-month="${nextMonthKey}"]`)
-                .classList.add("active");
+              // Find the next month section
+              const nextSection = document.querySelector(
+                `.month-section[data-month="${nextMonthKey}"]`
+              );
+            
+              // Force reflow so animation plays
+              nextSection.offsetHeight;
+
+              // Activate next month
+              nextSection.classList.add("active");
             });
 
             gallery.appendChild(divider);
