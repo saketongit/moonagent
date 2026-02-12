@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <title>Moon Today 🌙</title>
+
   <style>
     body {
       font-family: system-ui, sans-serif;
       text-align: center;
-      background: #000000;
-      color: #ffffff;
+      background: #000;
+      color: #fff;
       margin: 0;
       padding: 40px 20px;
     }
@@ -24,17 +25,9 @@
       border-radius: 12px;
     }
 
-    .gallery-title {
-      margin-top: 60px;
-      margin-bottom: 20px;
-      opacity: 0.8;
-      font-size: 18px;
-    }
-
     .gallery {
       display: flex;
       flex-direction: column;
-      gap: 30px;
       align-items: center;
     }
 
@@ -48,130 +41,114 @@
       font-size: 14px;
       opacity: 0.7;
     }
+
+    /* Month accordion */
+    .month-section {
+      display: none;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .month-section.active {
+      display: flex;
+    }
+
+    .month-divider {
+      margin: 50px 0;
+      font-size: 18px;
+      opacity: 0.8;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .month-divider:hover {
+      opacity: 1;
+    }
   </style>
 </head>
+
 <body>
 
   <h1>Moon Today 🌙</h1>
-  <p>8 PM everyday</p>
+  <p>Watch the Moon — updates every 6 hours</p>
 
-  <!-- Hero image -->
   <img class="hero" src="images/latest.jpg" alt="Moon today">
-
-  <!-- Gallery -->
 
   <div class="gallery" id="gallery"></div>
 
-  .month-divider {
-  margin: 40px 0;
-  font-size: 18px;
-  opacity: 0.8;
-  cursor: pointer;
-  user-select: none;
-}
+  <script>
+    fetch("gallery.json")
+      .then(res => res.json())
+      .then(data => {
+        const gallery = document.getElementById("gallery");
 
-.month-divider:hover {
-  opacity: 1;
-}
-
-.month-section {
-  display: none;
-}
-
-.month-section.active {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  align-items: center;
-}
-
-
-<script>
-fetch("gallery.json")
-  .then(response => response.json())
-  .then(data => {
-    const galleryEl = document.getElementById("gallery");
-
-    // 1️⃣ Group images by month (YYYY-MM)
-    const months = {};
-    data.images.forEach(item => {
-      const monthKey = item.date.slice(0, 7); // "2026-02"
-      if (!months[monthKey]) {
-        months[monthKey] = [];
-      }
-      months[monthKey].push(item);
-    });
-
-    // 2️⃣ Sort months descending (latest first)
-    const sortedMonths = Object.keys(months).sort().reverse();
-
-    let activeMonth = sortedMonths[0]; // latest month
-
-    sortedMonths.forEach((monthKey, index) => {
-      // Create month section
-      const section = document.createElement("div");
-      section.className = "month-section";
-      section.dataset.month = monthKey;
-
-      if (monthKey === activeMonth) {
-        section.classList.add("active");
-      }
-
-      // Add images for this month
-      months[monthKey].forEach(item => {
-        const wrapper = document.createElement("div");
-        wrapper.className = "gallery-item";
-
-        const img = document.createElement("img");
-        img.src = item.file;
-        img.alt = "Moon " + item.date;
-
-        const date = document.createElement("div");
-        date.className = "date";
-        date.textContent = item.date;
-
-        wrapper.appendChild(img);
-        wrapper.appendChild(date);
-        section.appendChild(wrapper);
-      });
-
-      galleryEl.appendChild(section);
-
-      // Add divider (except after last month)
-      if (index < sortedMonths.length - 1) {
-        const divider = document.createElement("div");
-        divider.className = "month-divider";
-
-        const [year, month] = monthKey.split("-");
-        const label = new Date(year, month - 1)
-          .toLocaleString("default", { month: "long", year: "numeric" });
-
-        divider.textContent = label + " ▸";
-
-        divider.addEventListener("click", () => {
-          document.querySelectorAll(".month-section").forEach(sec => {
-            sec.classList.remove("active");
-          });
-
-          section.classList.add("active");
-          section.scrollIntoView({ behavior: "smooth" });
+        // Group images by month
+        const months = {};
+        data.images.forEach(item => {
+          const key = item.date.slice(0, 7); // YYYY-MM
+          if (!months[key]) months[key] = [];
+          months[key].push(item);
         });
 
-        galleryEl.appendChild(divider);
-      }
-    });
-  })
-  .catch(err => {
-    console.error("Failed to load gallery.json", err);
-  });
-</script>
-    })
-    .catch(err => {
-      console.error("Failed to load gallery.json", err);
-    });
- </script>
+        // Sort months (latest first)
+        const monthKeys = Object.keys(months).sort().reverse();
+        let activeMonth = monthKeys[0];
 
+        monthKeys.forEach((monthKey, index) => {
+          const section = document.createElement("div");
+          section.className = "month-section";
+          section.dataset.month = monthKey;
 
+          if (monthKey === activeMonth) {
+            section.classList.add("active");
+          }
+
+          // Images
+          months[monthKey].forEach(item => {
+            const wrap = document.createElement("div");
+            wrap.className = "gallery-item";
+
+            const img = document.createElement("img");
+            img.src = item.file;
+
+            const date = document.createElement("div");
+            date.className = "date";
+            date.textContent = item.date;
+
+            wrap.appendChild(img);
+            wrap.appendChild(date);
+            section.appendChild(wrap);
+          });
+
+          gallery.appendChild(section);
+
+          // Divider to previous month
+          if (index < monthKeys.length - 1) {
+            const nextMonthKey = monthKeys[index + 1];
+            const [y, m] = nextMonthKey.split("-");
+            const label = new Date(y, m - 1)
+              .toLocaleString("default", { month: "long", year: "numeric" });
+
+            const divider = document.createElement("div");
+            divider.className = "month-divider";
+            divider.textContent = label + " ▸";
+
+            divider.addEventListener("click", () => {
+              document.querySelectorAll(".month-section")
+                .forEach(sec => sec.classList.remove("active"));
+
+              document
+                .querySelector(`.month-section[data-month="${nextMonthKey}"]`)
+                .classList.add("active");
+            });
+
+            gallery.appendChild(divider);
+          }
+        });
+      })
+      .catch(err => console.error("Failed to load gallery.json", err));
+  </script>
 
 </body>
 </html>
