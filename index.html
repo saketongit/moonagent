@@ -21,7 +21,6 @@
 
     .hero {
       max-width: 90%;
-      margin: 30px auto 60px;
       border-radius: 12px;
     }
 
@@ -117,6 +116,15 @@
       opacity: 1;
       font-weight: 500;
     }
+
+    .hero-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 30px auto 60px;
+    }
+
+
   </style>
 </head>
 
@@ -125,7 +133,10 @@
   <h1>Moon Today 🌙</h1>
   <p>Watch the Moon — updates every 6 hours</p>
 
-  <img class="hero" src="images/latest.jpg" alt="Moon today">
+  <div class="hero-wrapper">
+    <img class="hero" src="images/latest.jpg" alt="Moon today">
+    <div id="hero-date" class="date"></div>
+  </div>
 
   <div class="gallery" id="gallery"></div>
 
@@ -134,10 +145,16 @@
       .then(res => res.json())
       .then(data => {
         const gallery = document.getElementById("gallery");
+        // Set hero date (latest image date)
+        const heroDateEl = document.getElementById("hero-date");
+        if (data.images.length > 0) {
+          heroDateEl.textContent = data.images[0].date;
+        }
 
-        // Group images by month
+
+        // Group images by month (skip hero image)
         const months = {};
-        data.images.forEach(item => {
+        data.images.slice(1).forEach(item => {
           const key = item.date.slice(0, 7); // YYYY-MM
           if (!months[key]) months[key] = [];
           months[key].push(item);
