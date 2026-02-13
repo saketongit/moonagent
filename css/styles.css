@@ -47,6 +47,13 @@ h1 {
   animation: monthFadeIn 0.6s ease forwards;
 }
 
+.month-title {
+  margin: 40px 0 20px;
+  font-size: 18px;
+  opacity: 0.8;
+  text-align: center;
+}
+
 @keyframes monthFadeIn {
   from {
     opacity: 0;
@@ -153,6 +160,12 @@ h1 {
 .month-section.active.grid .gallery-item img {
   width: 100%;
   max-width: 160px;
+}
+
+/* Month title should span full width in grid */
+.month-section.grid .month-title {
+  grid-column: 1 / -1;
+  justify-self: center;
 }
 
 .month-title {

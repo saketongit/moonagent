@@ -2,23 +2,33 @@
       .then(res => res.json())
       .then(data => {
         const gallery = document.getElementById("gallery");
-        // Grid/List view state (Phase 1: no persistence yet)
-        let isGridView = false;
+        // ---- Grid/List persistence ----
+        const VIEW_KEY = "moon_view_mode";
+        let isGridView = localStorage.getItem(VIEW_KEY) === "grid";
 
         const viewToggleBtn = document.getElementById("view-toggle-button");
+        // Apply saved view mode on load
+        if (isGridView) {
+          document.querySelectorAll(".month-section").forEach(section => {
+            section.classList.add("grid");
+          });
+          viewToggleBtn.textContent = "☰";
+        } else {
+          viewToggleBtn.textContent = "⬛⬛";
+        }
+
 
         viewToggleBtn.addEventListener("click", () => {
           isGridView = !isGridView;
 
           document.querySelectorAll(".month-section").forEach(section => {
-            if (isGridView) {
-              section.classList.add("grid");
-            } else {
-              section.classList.remove("grid");
-            }
+              section.classList.toggle("grid", isGridView);
           });
 
-          // Change icon (temporary)
+          // Save preference
+          localStorage.setItem(VIEW_KEY, isGridView ? "grid" : "list");
+
+          // Update icon
           viewToggleBtn.textContent = isGridView ? "☰" : "⬛⬛";
         });
 
@@ -82,6 +92,7 @@
             nextSection.offsetHeight;
 
             nextSection.classList.add("active");
+            nextSection.classList.toggle("grid", isGridView);
 
             // Update selector UI
             selectorLabel.textContent = formatMonth(key) + " ▾";
@@ -101,23 +112,28 @@
         });
 
 
-        monthKeys.forEach((monthKey, index) => {
+
+        monthKeys.forEach(monthKey => {
+
+          // Create month section
           const section = document.createElement("div");
           section.className = "month-section";
           section.dataset.month = monthKey;
 
+          // Active month logic
           if (monthKey === activeMonth) {
             section.classList.add("active");
           }
 
-          // Add month title ONLY for past months (not present month)
+          section.classList.toggle("grid", isGridView);
+
+          // Month title (ONLY for past months)
           if (monthKey !== activeMonth) {
             const title = document.createElement("div");
             title.className = "month-title";
             title.textContent = formatMonth(monthKey);
             section.appendChild(title);
           }
-
 
           // Images
           months[monthKey].forEach(item => {
@@ -137,8 +153,6 @@
           });
 
           gallery.appendChild(section);
-
-
         });
       })
       .catch(err => console.error("Failed to load gallery.json", err));
