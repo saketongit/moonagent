@@ -101,6 +101,37 @@ slot_hour = slot_dt.hour
 hour_index = hour_of_year(slot_dt)
 print("Hour-of-year index:", hour_index)
 
+# --- Ensure today's entry exists in gallery.json (live-updating) ---
+
+if os.path.exists(GALLERY_FILE):
+    with open(GALLERY_FILE, "r", encoding="utf-8") as f:
+        gallery = json.load(f)
+else:
+    gallery = {"updated_at": today, "images": []}
+
+# Remove existing entry for today (if any)
+gallery["images"] = [
+    item for item in gallery["images"] if item["date"] != today
+]
+
+# Insert / update today's entry
+gallery["images"].insert(0, {
+    "date": today,
+    "file": daily_path.replace("\\", "/"),
+    "phase": phase,
+    "illumination": illum_pct,
+    "age_days": age_days,
+    "diff": None
+})
+
+gallery["updated_at"] = today
+
+with open(GALLERY_FILE, "w", encoding="utf-8") as f:
+    json.dump(gallery, f, indent=2)
+
+print("Updated today's entry in gallery.json (live-updating)")
+
+
 IS_DAILY_ARCHIVE_SLOT = (slot_hour == 18)
 
 print("Observation slot:", slot_date_str, f"{slot_hour:02d}:00 UTC")
