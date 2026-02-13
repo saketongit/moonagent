@@ -101,35 +101,6 @@ slot_hour = slot_dt.hour
 hour_index = hour_of_year(slot_dt)
 print("Hour-of-year index:", hour_index)
 
-# --- Ensure today's entry exists in gallery.json (live-updating) ---
-
-if os.path.exists(GALLERY_FILE):
-    with open(GALLERY_FILE, "r", encoding="utf-8") as f:
-        gallery = json.load(f)
-else:
-    gallery = {"updated_at": today, "images": []}
-
-# Remove existing entry for today (if any)
-gallery["images"] = [
-    item for item in gallery["images"] if item["date"] != today
-]
-
-# Insert / update today's entry
-gallery["images"].insert(0, {
-    "date": today,
-    "file": daily_path.replace("\\", "/"),
-    "phase": phase,
-    "illumination": illum_pct,
-    "age_days": age_days,
-    "diff": None
-})
-
-gallery["updated_at"] = today
-
-with open(GALLERY_FILE, "w", encoding="utf-8") as f:
-    json.dump(gallery, f, indent=2)
-
-print("Updated today's entry in gallery.json (live-updating)")
 
 
 IS_DAILY_ARCHIVE_SLOT = (slot_hour == 18)
@@ -175,85 +146,57 @@ shutil.copyfile(daily_path, latest_path)
 print("Saved:", daily_path)
 print("Updated:", latest_path)
 
-if IS_DAILY_ARCHIVE_SLOT:
+# --- Update gallery.json (single source of truth) ---
 
-    # Load or initialize gallery.json
-    if os.path.exists(GALLERY_FILE):
-        with open(GALLERY_FILE, "r", encoding="utf-8") as f:
-            gallery = json.load(f)
-    else:
-        gallery = {"updated_at": today, "images": []}
+if os.path.exists(GALLERY_FILE):
+    with open(GALLERY_FILE, "r", encoding="utf-8") as f:
+        gallery = json.load(f)
+else:
+    gallery = {"updated_at": today, "images": []}
 
-    # Compute diff from yesterday (if available)
-    diff = None
-    if gallery["images"]:
-        yesterday = gallery["images"][0]
-        diff = {
+# Remove today's entry if it already exists
+gallery["images"] = [
+    item for item in gallery["images"] if item["date"] != today
+]
+
+# Insert / update today's entry (live-updating)
+gallery["images"].insert(0, {
+    "date": today,
+    "file": daily_path.replace("\\", "/"),
+    "phase": phase,
+    "illumination": illum_pct,
+    "age_days": age_days,
+    "diff": None
+})
+
+# If this is the 18:00 UTC slot, finalize and cleanup
+if slot_hour == 18:
+    print("Finalizing daily archive and cleaning up intraday images...")
+
+    if len(gallery["images"]) > 1:
+        yesterday = gallery["images"][1]
+        gallery["images"][0]["diff"] = {
             "illumination_delta": round(
                 illum_pct - yesterday.get("illumination", 0), 1
             ),
             "age_delta": round(
-                age_days - yesterday.get("age_days", 0), 1),
+                age_days - yesterday.get("age_days", 0), 1
+            ),
             "phase_changed": phase != yesterday.get("phase")
         }
-
-    # Remove today if it already exists
-    gallery["images"] = [
-        item for item in gallery["images"] if item["date"] != today
-    ]
-
-    # Prepend today
-    gallery["images"].insert(0, {
-        "date": today,
-        "file": daily_path.replace("\\", "/"),
-        "phase": phase,
-        "illumination": illum_pct,
-        "age_days": age_days,
-        "diff": diff
-    })
-
-    # Keep full history (no trimming)
-    gallery["updated_at"] = today
-
-    with open(GALLERY_FILE, "w", encoding="utf-8") as f:
-        json.dump(gallery, f, indent=2)
-
-    print("Archived daily snapshot in gallery.json")
-    print("Running same-day cleanup...")
 
     for filename in os.listdir(IMAGES_DIR):
         if not filename.startswith(f"moon_{today}_"):
             continue
-
         if filename == f"moon_{today}_18.jpg":
-            continue  # keep canonical image
-
-        file_path = os.path.join(IMAGES_DIR, filename)
-        os.remove(file_path)
+            continue
+        os.remove(os.path.join(IMAGES_DIR, filename))
         print("Deleted:", filename)
 
+gallery["updated_at"] = today
 
-else:
-    # Update LIVE (today) entry in gallery.json
-    if os.path.exists(GALLERY_FILE):
-        with open(GALLERY_FILE, "r", encoding="utf-8") as f:
-            gallery = json.load(f)
-    else:
-        gallery = {"updated_at": today, "images": []}
+with open(GALLERY_FILE, "w", encoding="utf-8") as f:
+    json.dump(gallery, f, indent=2)
 
-    gallery["live"] = {
-        "date": today,
-        "slot": f"{slot_hour:02d}:00",
-        "file": daily_path.replace("\\", "/"),
-        "phase": phase,
-        "illumination": illum_pct,
-        "age_days": age_days
-    }
-
-    gallery["updated_at"] = today
-
-    with open(GALLERY_FILE, "w", encoding="utf-8") as f:
-        json.dump(gallery, f, indent=2)
-
-    print("Updated live (today) snapshot in gallery.json")
+print("gallery.json updated successfully")
 
