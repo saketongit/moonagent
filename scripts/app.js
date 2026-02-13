@@ -2,6 +2,26 @@
       .then(res => res.json())
       .then(data => {
         const gallery = document.getElementById("gallery");
+        // Grid/List view state (Phase 1: no persistence yet)
+        let isGridView = false;
+
+        const viewToggleBtn = document.getElementById("view-toggle-button");
+
+        viewToggleBtn.addEventListener("click", () => {
+          isGridView = !isGridView;
+
+          document.querySelectorAll(".month-section").forEach(section => {
+            if (isGridView) {
+              section.classList.add("grid");
+            } else {
+              section.classList.remove("grid");
+            }
+          });
+
+          // Change icon (temporary)
+          viewToggleBtn.textContent = isGridView ? "☰" : "⬛⬛";
+        });
+
         // Set hero date (latest image date)
         const heroDateEl = document.getElementById("hero-date");
         if (data.images.length > 0) {
@@ -90,6 +110,15 @@
             section.classList.add("active");
           }
 
+          // Add month title ONLY for past months (not present month)
+          if (monthKey !== activeMonth) {
+            const title = document.createElement("div");
+            title.className = "month-title";
+            title.textContent = formatMonth(monthKey);
+            section.appendChild(title);
+          }
+
+
           // Images
           months[monthKey].forEach(item => {
             const wrap = document.createElement("div");
@@ -109,37 +138,7 @@
 
           gallery.appendChild(section);
 
-          // Divider to previous month
-          if (index < monthKeys.length - 1) {
-            const nextMonthKey = monthKeys[index + 1];
-            const [y, m] = nextMonthKey.split("-");
-            const label = new Date(y, m - 1)
-              .toLocaleString("default", { month: "long", year: "numeric" });
 
-            const divider = document.createElement("div");
-            divider.className = "month-divider";
-            divider.textContent = label + " ▸";
-
-            divider.addEventListener("click", () => {
-              
-              // Remove active from all months
-              document.querySelectorAll(".month-section")
-                .forEach(sec => sec.classList.remove("active"));
-
-              // Find the next month section
-              const nextSection = document.querySelector(
-                `.month-section[data-month="${nextMonthKey}"]`
-              );
-            
-              // Force reflow so animation plays
-              nextSection.offsetHeight;
-
-              // Activate next month
-              nextSection.classList.add("active");
-            });
-
-            gallery.appendChild(divider);
-          }
         });
       })
       .catch(err => console.error("Failed to load gallery.json", err));

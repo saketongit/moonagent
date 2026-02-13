@@ -58,17 +58,7 @@ h1 {
   }
 }
 
-.month-divider {
-  margin: 50px 0;
-  font-size: 18px;
-  opacity: 0.8;
-  cursor: pointer;
-  user-select: none;
-}
 
-.month-divider:hover {
-  opacity: 1;
-}
 
 /* Floating Month Selector */
 .month-selector {
@@ -128,4 +118,48 @@ h1 {
   align-items: center;
   margin: 30px auto 60px;
 }
+
+/* Grid / List Toggle (Phase 1) */
+.view-toggle {
+  position: fixed;
+  bottom: 80px; /* sits above month selector */
+  right: 24px;
+  z-index: 1000;
+}
+
+.view-toggle-button {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  opacity: 0.9;
+}
+
+.view-toggle-button:hover {
+  opacity: 1;
+}
+
+/* Grid view — only for ACTIVE month */
+.month-section.active.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  align-items: center;
+  justify-items: center;
+}
+
+/* Make images fit grid cells */
+.month-section.active.grid .gallery-item img {
+  width: 100%;
+  max-width: 160px;
+}
+
+.month-title {
+  font-size: 18px;
+  margin: 40px 0 20px;
+  opacity: 0.8;
+  letter-spacing: 0.3px;
+}
+
 
