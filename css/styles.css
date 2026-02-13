@@ -1,1 +1,131 @@
+body {
+  font-family: system-ui, sans-serif;
+  text-align: center;
+  background: #000;
+  color: #fff;
+  margin: 0;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.hero {
+  max-width: 90%;
+  border-radius: 12px;
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gallery-item img {
+  max-width: 300px;
+  border-radius: 8px;
+}
+
+.date {
+  margin-top: 8px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* Month accordion */
+.month-section {
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.month-section.active {
+  display: flex;
+  animation: monthFadeIn 0.6s ease forwards;
+}
+
+@keyframes monthFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.month-divider {
+  margin: 50px 0;
+  font-size: 18px;
+  opacity: 0.8;
+  cursor: pointer;
+  user-select: none;
+}
+
+.month-divider:hover {
+  opacity: 1;
+}
+
+/* Floating Month Selector */
+.month-selector {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  font-size: 14px;
+}
+
+.month-selector-label {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+
+.month-selector-label:hover {
+  opacity: 1;
+}
+
+.month-selector-menu {
+  display: none;
+  margin-top: 8px;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 12px;
+  padding: 6px 0;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.month-selector-menu.active {
+  display: block;
+}
+
+.month-selector-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.month-selector-item:hover {
+  opacity: 1;
+}
+
+.month-selector-item.active {
+  opacity: 1;
+  font-weight: 500;
+}
+
+.hero-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px auto 60px;
+}
 
