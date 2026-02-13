@@ -176,3 +176,67 @@ h1 {
 }
 
 
+/* Hover border style */
+.month-section.active.grid .gallery-item {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.month-section.active.grid .gallery-item:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+
+/* glass border commented out
+
+.month-section.active.grid .gallery-item {
+  position: relative;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
+.month-section.active.grid .gallery-item {
+  animation: gridItemIn 0.35s ease both;
+}
+
+@keyframes gridItemIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+.month-section.active.grid .gallery-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  opacity: 0;
+  transition: opacity 0.35s ease;
+
+  pointer-events: none;
+}
+
+
+.month-section.active.grid .gallery-item::before {
+  opacity: 1;
+}
+*/
+
+
+
+
+
+
