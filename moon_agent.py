@@ -203,4 +203,27 @@ if IS_DAILY_ARCHIVE_SLOT:
 
 
 else:
-    print("Not an archive slot — gallery not updated")
+    else:
+    # Update LIVE (today) entry in gallery.json
+    if os.path.exists(GALLERY_FILE):
+        with open(GALLERY_FILE, "r", encoding="utf-8") as f:
+            gallery = json.load(f)
+    else:
+        gallery = {"updated_at": today, "images": []}
+
+    gallery["live"] = {
+        "date": today,
+        "slot": f"{slot_hour:02d}:00",
+        "file": daily_path.replace("\\", "/"),
+        "phase": phase,
+        "illumination": illum_pct,
+        "age_days": age_days
+    }
+
+    gallery["updated_at"] = today
+
+    with open(GALLERY_FILE, "w", encoding="utf-8") as f:
+        json.dump(gallery, f, indent=2)
+
+    print("Updated live (today) snapshot in gallery.json")
+
