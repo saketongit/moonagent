@@ -203,7 +203,6 @@ if IS_DAILY_ARCHIVE_SLOT:
 
 
 else:
-    else:
     # Update LIVE (today) entry in gallery.json
     if os.path.exists(GALLERY_FILE):
         with open(GALLERY_FILE, "r", encoding="utf-8") as f:
