@@ -28,6 +28,14 @@ h1 {
   border-radius: 8px;
 }
 
+/* Prevent focus ring / active flash on touch */
+.gallery-item:focus,
+.gallery-item:active {
+  outline: none;
+  background: transparent;
+}
+
+
 .date {
   margin-top: 8px;
   font-size: 14px;
@@ -192,6 +200,16 @@ h1 {
   border: 1px solid transparent;
   border-radius: 10px;
   padding: 10px;
+
+  /* Mobile touch fix */
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.month-section.active.grid .gallery-item:focus,
+.month-section.active.grid .gallery-item:active {
+  background-color: rgba(255,255,255,0.01);
+  outline: none;
 }
 
 .month-section.active.grid .gallery-item:hover {
