@@ -1,6 +1,7 @@
     fetch("gallery.json")
       .then(res => res.json())
       .then(data => {
+
         const gallery = document.getElementById("gallery");
 
         // ---- Phase modal logic (real) ----
@@ -71,12 +72,20 @@
           viewToggleBtn.textContent = isGridView ? "☰" : "▦";
         });
 
-        // Set hero date (latest image date)
+        // ---- Hero ambient caption ----
+        const today = data.images[0];
+
+        const heroPhaseLine = document.getElementById("hero-phase-line");
         const heroDateEl = document.getElementById("hero-date");
-        if (data.images.length > 0) {
-          heroDateEl.textContent = data.images[0].date;
+
+        if (heroPhaseLine) {
+          heroPhaseLine.textContent =
+            `${today.phase} · ${today.illumination}% illuminated`;
         }
 
+        if (heroDateEl) {
+          heroDateEl.textContent = today.date;
+        }
 
         // Group images by month (skip hero image)
         const months = {};
