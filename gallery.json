@@ -1,6 +1,14 @@
 {
-  "updated_at": "2026-02-13",
+  "updated_at": "2026-02-14",
   "images": [
+    {
+      "date": "2026-02-14",
+      "file": "images/moon_2026-02-14_06.jpg",
+      "phase": "Waning Crescent",
+      "illumination": 5.0,
+      "age_days": 27.4,
+      "diff": null
+    },
     {
       "date": "2026-02-13",
       "file": "images/moon_2026-02-13_18.jpg",
