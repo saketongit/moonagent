@@ -14,7 +14,7 @@
           });
           viewToggleBtn.textContent = "☰";
         } else {
-          viewToggleBtn.textContent = "⬛⬛";
+          viewToggleBtn.textContent = "▦";
         }
 
 
@@ -29,7 +29,7 @@
           localStorage.setItem(VIEW_KEY, isGridView ? "grid" : "list");
 
           // Update icon
-          viewToggleBtn.textContent = isGridView ? "☰" : "⬛⬛";
+          viewToggleBtn.textContent = isGridView ? "☰" : "▦";
         });
 
         // Set hero date (latest image date)
