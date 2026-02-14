@@ -23,6 +23,12 @@ h1 {
   align-items: center;
 }
 
+/* Remove mobile tap highlight for moon items (ALL views) */
+.gallery-item {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
 .gallery-item img {
   max-width: 300px;
   border-radius: 8px;
@@ -192,24 +198,6 @@ h1 {
   margin: 40px 0 20px;
   opacity: 0.8;
   letter-spacing: 0.3px;
-}
-
-
-/* Hover border style */
-.month-section.active.grid .gallery-item {
-  border: 1px solid transparent;
-  border-radius: 10px;
-  padding: 10px;
-
-  /* Mobile touch fix */
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
-}
-
-.month-section.active.grid .gallery-item:focus,
-.month-section.active.grid .gallery-item:active {
-  background-color: rgba(255,255,255,0.01);
-  outline: none;
 }
 
 .month-section.active.grid .gallery-item:hover {
