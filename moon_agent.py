@@ -6,6 +6,40 @@ import json
 from math import cos, pi
 SVS_FRAME_OFFSET = 0
 
+PHASE_INFO = {
+    "New Moon": {
+        "icon": "🌑",
+        "meaning": "The Moon is between Earth and Sun, invisible in the sky."
+    },
+    "Waxing Crescent": {
+        "icon": "🌒",
+        "meaning": "A thin crescent appears as sunlight slowly returns."
+    },
+    "First Quarter": {
+        "icon": "🌓",
+        "meaning": "Half of the Moon is illuminated, growing brighter."
+    },
+    "Waxing Gibbous": {
+        "icon": "🌔",
+        "meaning": "The Moon is mostly lit, approaching fullness."
+    },
+    "Full Moon": {
+        "icon": "🌕",
+        "meaning": "The Moon’s face is fully illuminated."
+    },
+    "Waning Gibbous": {
+        "icon": "🌖",
+        "meaning": "Light begins to fade after the full Moon."
+    },
+    "Last Quarter": {
+        "icon": "🌗",
+        "meaning": "Half of the Moon is illuminated, fading."
+    },
+    "Waning Crescent": {
+        "icon": "🌘",
+        "meaning": "A thin crescent remains before the next New Moon."
+    }
+}
 
 
 def get_latest_completed_slot(now_utc: datetime) -> datetime:
@@ -64,6 +98,12 @@ def illumination(age):
     phase_angle = 2 * pi * age / SYNODIC_MONTH
     return (1 - cos(phase_angle)) / 2
 
+def moon_distance_km(age):
+    mean = 384400       # km
+    amplitude = 21100   # km
+    phase_angle = 2 * pi * age / SYNODIC_MONTH
+    return mean - amplitude * cos(phase_angle)
+
 
 def phase_name(age):
     if age < 1.8:
@@ -119,9 +159,15 @@ today = slot_dt.date().isoformat()
 age = moon_age(today_dt)
 illum = illumination(age)
 phase = phase_name(age)
+phase_meta = PHASE_INFO.get(phase, {})
+phase_icon = phase_meta.get("icon")
+phase_meaning = phase_meta.get("meaning")
+
 
 illum_pct = round(illum * 100, 1)
 age_days = round(age, 1)
+
+distance_km = round(moon_distance_km(age))
 
 daily_name = f"moon_{today}_{slot_hour:02d}.jpg"
 daily_path = os.path.join(IMAGES_DIR, daily_name)
@@ -164,8 +210,11 @@ gallery["images"].insert(0, {
     "date": today,
     "file": daily_path.replace("\\", "/"),
     "phase": phase,
+    "phase_icon": phase_icon,
+    "phase_meaning": phase_meaning,
     "illumination": illum_pct,
     "age_days": age_days,
+    "distance_km": distance_km,
     "diff": None
 })
 

@@ -2,6 +2,45 @@
       .then(res => res.json())
       .then(data => {
         const gallery = document.getElementById("gallery");
+
+        // ---- Phase modal logic (real) ----
+        const modalOverlay = document.getElementById("phase-modal-overlay");
+        const modalImg = document.getElementById("phase-modal-img");
+        const modalTitle = document.getElementById("phase-modal-title");
+        const modalDesc = document.getElementById("phase-modal-desc");
+        const modalMeta = document.getElementById("phase-modal-meta");
+
+        function openPhaseModal(data) {
+          modalImg.src = data.image;
+          modalTitle.textContent = data.icon
+            ? `${data.icon} ${data.phase}`
+            : data.phase;
+          modalDesc.textContent = data.meaning || "";
+
+          modalMeta.innerHTML = `
+            <span>🌕 ${data.illumination}% illuminated</span>
+            <span>🕒 ${data.age} days old</span>
+            <span>🌍 ${data.distance.toLocaleString()} km away</span>
+          `;
+
+          modalOverlay.classList.remove("hidden");
+        }
+
+        function closePhaseModal() {
+          modalOverlay.classList.add("hidden");
+        }
+
+        // Click outside modal closes it
+        modalOverlay.addEventListener("click", (e) => {
+          if (e.target === modalOverlay) {
+            closePhaseModal();
+          }
+        });
+
+
+
+
+
         // ---- Grid/List persistence ----
         const VIEW_KEY = "moon_view_mode";
         let isGridView = localStorage.getItem(VIEW_KEY) === "grid";
@@ -139,6 +178,26 @@
           months[monthKey].forEach(item => {
             const wrap = document.createElement("div");
             wrap.className = "gallery-item";
+            wrap.dataset.phase = item.phase || "";
+            wrap.dataset.phaseIcon = item.phase_icon || "";
+            wrap.dataset.phaseMeaning = item.phase_meaning || "";
+            wrap.dataset.image = item.file;
+
+            wrap.style.cursor = "pointer";
+
+            wrap.addEventListener("click", () => {
+              openPhaseModal({
+                image: wrap.dataset.image,
+                phase: wrap.dataset.phase,
+                icon: wrap.dataset.phaseIcon,
+                meaning: wrap.dataset.phaseMeaning,
+                illumination: item.illumination,
+                age: item.age_days,
+                distance: item.distance_km
+              });
+            });
+
+
 
             const img = document.createElement("img");
             img.src = item.file;
@@ -154,5 +213,6 @@
 
           gallery.appendChild(section);
         });
+
       })
       .catch(err => console.error("Failed to load gallery.json", err));

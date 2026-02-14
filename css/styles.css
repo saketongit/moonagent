@@ -136,12 +136,23 @@ h1 {
 
 .view-toggle-button {
   background: rgba(255, 255, 255, 0.08);
-  padding: 10px 12px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
   cursor: pointer;
   backdrop-filter: blur(6px);
   opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
 }
+
+.view-toggle-button:active {
+  transform: scale(0.96);
+  opacity: 0.85;
+}
+
 
 .view-toggle-button:hover {
   opacity: 1;
@@ -184,7 +195,7 @@ h1 {
 }
 
 .month-section.active.grid .gallery-item:hover {
-  border-color: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
@@ -234,6 +245,72 @@ h1 {
   opacity: 1;
 }
 */
+
+/* Phase modal overlay */
+.phase-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* Hide helper */
+.phase-modal-overlay.hidden {
+  display: none;
+}
+
+/* Modal card */
+.phase-modal {
+  display: flex;
+  gap: 16px;
+  max-width: 520px;
+  background: rgba(20, 20, 20, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+/* Image */
+.phase-modal-image img {
+  width: 140px;
+  height: 140px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Text */
+.phase-modal-content {
+  text-align: left;
+}
+
+.phase-modal-content h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.phase-modal-content p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.phase-meta {
+  margin-top: 10px;
+  font-size: 13px;
+  opacity: 0.7;
+  line-height: 1.6;
+}
+
+.phase-meta span {
+  display: inline-block;
+  margin-right: 14px;
+  white-space: nowrap;
+}
+
 
 
 
