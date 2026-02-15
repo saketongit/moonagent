@@ -363,6 +363,45 @@ body.modal-open {
   white-space: nowrap;
 }
 
+@media (max-width: 640px) {
+  .phase-modal {
+    outline: 2px solid red;
+  }
+}
+
+/* Mobile modal scaling */
+@media (max-width: 640px) {
+
+  .phase-modal {
+    width: min(92vw, 420px);
+    padding: 18px;
+    gap: 18px;
+  }
+
+  .phase-modal-image img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .phase-modal-content h3 {
+    font-size: 18px;
+  }
+
+  .phase-modal-content p {
+    font-size: 15px;
+  }
+
+  .phase-date {
+    font-size: 14px;
+  }
+
+  .phase-meta {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+
 
 
 
