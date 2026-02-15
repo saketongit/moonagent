@@ -366,9 +366,14 @@ body.modal-open {
 /* Mobile modal scaling */
 @media (max-width: 640px) {
 
+  /* Gallery images */
+  .gallery-item img {
+    max-width: 120px;
+  }
+
+  /* Modal */
   .phase-modal {
-    width: 92vw;
-    max-width: none;
+    width: min(92vw, 420px);
     padding: 16px;
     gap: 16px;
   }
@@ -394,7 +399,26 @@ body.modal-open {
     font-size: 13px;
     line-height: 1.5;
   }
+
+  /* Floating buttons */
+  .view-toggle-button {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .month-selector {
+    font-size: 13px;
+  }
+
+  .month-selector-label {
+    padding: 8px 12px;
+  }
 }
+
+
+
+
 
 
 
