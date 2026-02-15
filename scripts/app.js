@@ -1,7 +1,7 @@
     fetch("gallery.json")
       .then(res => res.json())
       .then(data => {
-
+        let scrollPosition = 0;
         const gallery = document.getElementById("gallery");
 
         // ---- Phase modal logic (real) ----
@@ -10,18 +10,31 @@
         const modalTitle = document.getElementById("phase-modal-title");
         const modalDesc = document.getElementById("phase-modal-desc");
         const modalMeta = document.getElementById("phase-modal-meta");
+        const modalDate = document.getElementById("phase-modal-date");
+
 
         function openPhaseModal(data) {
+          // Save scroll position
+          scrollPosition = window.scrollY;
+          
+          // Lock background scroll
+          document.body.classList.add("modal-open");
+
           modalImg.src = data.image;
           modalTitle.textContent = data.icon
             ? `${data.icon} ${data.phase}`
             : data.phase;
           modalDesc.textContent = data.meaning || "";
+          modalDate.textContent = data.date;
 
           modalMeta.innerHTML = `
-            <span>🌕 ${data.illumination}% illuminated</span>
-            <span>🕒 ${data.age} days old</span>
+            <div class="phase-meta-row">
+              <span>🌕 ${data.illumination}% illuminated</span>
+              <span>🕒 ${data.age} days old</span>
+            </div>
+            <div class="phase-meta-row">  
             <span>🌍 ${data.distance.toLocaleString()} km away</span>
+            </div>
           `;
 
           modalOverlay.classList.remove("hidden");
@@ -29,6 +42,12 @@
 
         function closePhaseModal() {
           modalOverlay.classList.add("hidden");
+
+          // Unlock background scroll
+          document.body.classList.remove("modal-open");
+
+          // Restore scroll position
+          window.scrollTo(0, scrollPosition);
         }
 
         // Click outside modal closes it
@@ -202,7 +221,8 @@
                 meaning: wrap.dataset.phaseMeaning,
                 illumination: item.illumination,
                 age: item.age_days,
-                distance: item.distance_km
+                distance: item.distance_km,
+                date: item.date
               });
             });
 

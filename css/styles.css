@@ -41,6 +41,9 @@ h1 {
   background: transparent;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
 
 .date {
   margin-top: 8px;
@@ -333,6 +336,12 @@ h1 {
   opacity: 0.85;
 }
 
+.phase-date {
+  margin-top: 6px;
+  font-size: 13px;
+  opacity: 0.6;
+}
+
 .phase-meta {
   margin-top: 10px;
   font-size: 13px;
@@ -340,9 +349,17 @@ h1 {
   line-height: 1.6;
 }
 
+.phase-meta-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: nowrap;
+}
+
+.phase-meta-row + .phase-meta-row {
+  margin-top: 4px;
+}
+
 .phase-meta span {
-  display: inline-block;
-  margin-right: 14px;
   white-space: nowrap;
 }
 
