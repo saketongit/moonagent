@@ -373,7 +373,7 @@ body.modal-open {
 
   /* Modal */
   .phase-modal {
-    width: min(92vw, 420px);
+    width: min(88vw, 380px);
     padding: 16px;
     gap: 16px;
   }
@@ -402,9 +402,10 @@ body.modal-open {
 
   /* Floating buttons */
   .view-toggle-button {
-    width: 36px;
-    height: 36px;
-    font-size: 16px;
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+    border-radius: 10px;
   }
 
   .month-selector {
@@ -412,7 +413,9 @@ body.modal-open {
   }
 
   .month-selector-label {
-    padding: 8px 12px;
+    font-size: 12px;
+    padding: 7px 10px;
+    border-radius: 10px;
   }
 }
 
