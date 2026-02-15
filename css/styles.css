@@ -349,13 +349,13 @@ body.modal-open {
   line-height: 1.6;
 }
 
-.phase-meta-row {
+.phase-meta .meta-row {
   display: flex;
   gap: 14px;
   flex-wrap: nowrap;
 }
 
-.phase-meta-row + .phase-meta-row {
+.phase-meta .meta-row + .meta-row {
   margin-top: 4px;
 }
 

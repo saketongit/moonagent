@@ -4,6 +4,30 @@
         let scrollPosition = 0;
         const gallery = document.getElementById("gallery");
 
+        const REAL_MOON_IMAGES = {
+          "New Moon": "images/real/new-moon.png",
+          "Waxing Crescent": "images/real/waxing-crescent.png",
+          "First Quarter": "images/real/first-quarter.png",
+          "Waxing Gibbous": "images/real/waxing-gibbous.png",
+          "Full Moon": "images/real/full-moon.png",
+          "Waning Gibbous": "images/real/waning-gibbous.png",
+          "Last Quarter": "images/real/last-quarter.png",
+          "Waning Crescent": "images/real/waning-crescent.png"
+        };
+
+        const PHOTO_CREDITS = {
+          "New Moon": "",
+          "Waxing Crescent": "Getty Images",
+          "First Quarter": "UMUT DAĞLI",
+          "Waxing Gibbous": "Getty Images",
+          "Full Moon": "Rino Adamo",
+          "Waning Gibbous": "Jessica Chortkoff",
+          "Last Quarter": "Leonora Oates",
+          "Waning Crescent": "Wendy Calandrelli"
+        };
+
+
+
         // ---- Phase modal logic (real) ----
         const modalOverlay = document.getElementById("phase-modal-overlay");
         const modalImg = document.getElementById("phase-modal-img");
@@ -12,7 +36,6 @@
         const modalMeta = document.getElementById("phase-modal-meta");
         const modalDate = document.getElementById("phase-modal-date");
 
-
         function openPhaseModal(data) {
           // Save scroll position
           scrollPosition = window.scrollY;
@@ -20,13 +43,15 @@
           // Lock background scroll
           document.body.classList.add("modal-open");
 
-          modalImg.src = data.image;
+          modalImg.src =
+            REAL_MOON_IMAGES[data.phase] || data.image;
           modalTitle.textContent = data.icon
             ? `${data.icon} ${data.phase}`
             : data.phase;
           modalDesc.textContent = data.meaning || "";
           modalDate.textContent = data.date;
 
+          const photographer = PHOTO_CREDITS[data.phase];
           modalMeta.innerHTML = `
             <div class="phase-meta-row">
               <span>🌕 ${data.illumination}% illuminated</span>
@@ -34,6 +59,7 @@
             </div>
             <div class="phase-meta-row">  
             <span>🌍 ${data.distance.toLocaleString()} km away</span>
+            ${photographer ? `<span>📷 Photo: ${photographer}</span>` : ""}
             </div>
           `;
 
