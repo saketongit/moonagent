@@ -371,35 +371,6 @@ body.modal-open {
     max-width: 120px;
   }
 
-  /* Modal */
-  .phase-modal {
-    max-width: 360px;
-    padding: 14px;
-    gap: 14px;
-  }
-
-  .phase-modal-image img {
-    width: 110px;
-    height: 110px;
-  }
-
-  .phase-modal-content h3 {
-    font-size: 16px;
-  }
-
-  .phase-modal-content p {
-    font-size: 14px;
-  }
-
-  .phase-date {
-    font-size: 13px;
-  }
-
-  .phase-meta {
-    font-size: 13px;
-    line-height: 1.5;
-  }
-
   /* Floating buttons */
   .view-toggle-button {
     width: 34px;
@@ -417,7 +388,12 @@ body.modal-open {
     padding: 7px 10px;
     border-radius: 10px;
   }
+
+  .phase-modal {
+    transform: scale(1.06);
+  }
 }
+
 
 
 
