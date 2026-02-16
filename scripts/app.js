@@ -5,14 +5,14 @@
         const gallery = document.getElementById("gallery");
 
         const REAL_MOON_IMAGES = {
-          "New Moon": "images/real/new-moon.png",
-          "Waxing Crescent": "images/real/waxing-crescent.png",
-          "First Quarter": "images/real/first-quarter.png",
-          "Waxing Gibbous": "images/real/waxing-gibbous.png",
-          "Full Moon": "images/real/full-moon.png",
-          "Waning Gibbous": "images/real/waning-gibbous.png",
-          "Last Quarter": "images/real/last-quarter.png",
-          "Waning Crescent": "images/real/waning-crescent.png"
+          "New Moon": "images/real/new-moon.webp",
+          "Waxing Crescent": "images/real/waxing-crescent.webp",
+          "First Quarter": "images/real/first-quarter.webp",
+          "Waxing Gibbous": "images/real/waxing-gibbous.webp",
+          "Full Moon": "images/real/full-moon.webp",
+          "Waning Gibbous": "images/real/waning-gibbous.webp",
+          "Last Quarter": "images/real/last-quarter.webp",
+          "Waning Crescent": "images/real/waning-crescent.webp"
         };
 
         const PHOTO_CREDITS = {

@@ -324,10 +324,10 @@ body.modal-open {
 
 /* Mobile modal scaling */
 @media (max-width: 640px) {
-    .phase-modal-scale {
-      transform: scale(0.72);
-      transform-origin: center top;
-    }
+  .phase-modal-scale {
+    transform: scale(0.72);
+    transform-origin: center top;
+  }
 
   /* Gallery images */
   .gallery-item img {
@@ -342,8 +342,20 @@ body.modal-open {
     border-radius: 10px;
   }
 
+  .date {
+    font-size: 8px;
+    margin-top: 4px;
+    opacity: 0.6;
+    letter-spacing: 0.2px;
+  }
+
   .month-selector {
-    font-size: 13px;
+    font-size: 12px;
+    bottom: 24px;
+  }
+
+  .view-toggle {
+    bottom: 60px;
   }
 
   .month-selector-label {
