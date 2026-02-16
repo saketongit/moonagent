@@ -53,11 +53,11 @@
 
           const photographer = PHOTO_CREDITS[data.phase];
           modalMeta.innerHTML = `
-            <div class="phase-meta-row">
+            <div class="meta-row">
               <span>🌕 ${data.illumination}% illuminated</span>
               <span>🕒 ${data.age} days old</span>
             </div>
-            <div class="phase-meta-row">  
+            <div class="meta-row">  
             <span>🌍 ${data.distance.toLocaleString()} km away</span>
             ${photographer ? `<span>📷 Photo: ${photographer}</span>` : ""}
             </div>

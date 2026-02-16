@@ -237,52 +237,6 @@ body.modal-open {
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-
-
-/* glass border commented out
-
-.month-section.active.grid .gallery-item {
-  position: relative;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-
-.month-section.active.grid .gallery-item {
-  animation: gridItemIn 0.35s ease both;
-}
-
-@keyframes gridItemIn {
-  from {
-    opacity: 0;
-    transform: scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-
-.month-section.active.grid .gallery-item::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-
-  opacity: 0;
-  transition: opacity 0.35s ease;
-
-  pointer-events: none;
-}
-
-
-.month-section.active.grid .gallery-item::before {
-  opacity: 1;
-}
-*/
-
 /* Phase modal overlay */
 .phase-modal-overlay {
   position: fixed;
@@ -293,6 +247,11 @@ body.modal-open {
   align-items: center;
   justify-content: center;
   z-index: 2000;
+}
+
+.phase-modal-scale {
+  display: flex;
+  justify-content: center;
 }
 
 /* Hide helper */
@@ -365,6 +324,10 @@ body.modal-open {
 
 /* Mobile modal scaling */
 @media (max-width: 640px) {
+    .phase-modal-scale {
+      transform: scale(0.72);
+      transform-origin: center top;
+    }
 
   /* Gallery images */
   .gallery-item img {
@@ -387,10 +350,6 @@ body.modal-open {
     font-size: 12px;
     padding: 7px 10px;
     border-radius: 10px;
-  }
-
-  .phase-modal {
-    transform: scale(1.06);
   }
 }
 
