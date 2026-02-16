@@ -373,14 +373,14 @@ body.modal-open {
 
   /* Modal */
   .phase-modal {
-    width: min(88vw, 380px);
-    padding: 16px;
-    gap: 16px;
+    max-width: 360px;
+    padding: 14px;
+    gap: 14px;
   }
 
   .phase-modal-image img {
-    width: 112px;
-    height: 112px;
+    width: 110px;
+    height: 110px;
   }
 
   .phase-modal-content h3 {
