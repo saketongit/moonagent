@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-02-18",
-      "file": "images/moon_2026-02-18_00.jpg",
-      "phase": "New Moon",
-      "phase_icon": "\ud83c\udf11",
-      "phase_meaning": "The Moon is between Earth and Sun, invisible in the sky.",
-      "illumination": 2.9,
-      "age_days": 1.6,
-      "distance_km": 364541,
+      "file": "images/moon_2026-02-18_06.jpg",
+      "phase": "Waxing Crescent",
+      "phase_icon": "\ud83c\udf12",
+      "phase_meaning": "A thin crescent appears as sunlight slowly returns.",
+      "illumination": 3.9,
+      "age_days": 1.9,
+      "distance_km": 364948,
       "diff": null
     },
     {
