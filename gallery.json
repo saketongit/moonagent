@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-02-19",
+  "updated_at": "2026-02-20",
   "images": [
+    {
+      "date": "2026-02-20",
+      "file": "images/moon_2026-02-20_00.jpg",
+      "phase": "Waxing Crescent",
+      "phase_icon": "\ud83c\udf12",
+      "phase_meaning": "A thin crescent appears as sunlight slowly returns.",
+      "illumination": 14.1,
+      "age_days": 3.6,
+      "distance_km": 369255,
+      "diff": null
+    },
     {
       "date": "2026-02-19",
       "file": "images/moon_2026-02-19_18.jpg",
