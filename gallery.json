@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-02-23",
-      "file": "images/moon_2026-02-23_06.jpg",
+      "file": "images/moon_2026-02-23_12.jpg",
       "phase": "First Quarter",
       "phase_icon": "\ud83c\udf13",
       "phase_meaning": "Half of the Moon is illuminated, growing brighter.",
-      "illumination": 44.6,
-      "age_days": 6.9,
-      "distance_km": 382102,
+      "illumination": 47.2,
+      "age_days": 7.1,
+      "distance_km": 383221,
       "diff": null
     },
     {
