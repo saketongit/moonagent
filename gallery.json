@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-03-06",
-      "file": "images/moon_2026-03-06_00.jpg",
+      "file": "images/moon_2026-03-06_06.jpg",
       "phase": "Waning Gibbous",
       "phase_icon": "\ud83c\udf16",
       "phase_meaning": "Light begins to fade after the full Moon.",
-      "illumination": 91.1,
-      "age_days": 17.6,
-      "distance_km": 401726,
+      "illumination": 89.5,
+      "age_days": 17.9,
+      "distance_km": 401062,
       "diff": null
     },
     {
