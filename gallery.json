@@ -3,14 +3,18 @@
   "images": [
     {
       "date": "2026-03-08",
-      "file": "images/moon_2026-03-08_12.jpg",
-      "phase": "Waning Gibbous",
-      "phase_icon": "\ud83c\udf16",
-      "phase_meaning": "Light begins to fade after the full Moon.",
-      "illumination": 70.9,
-      "age_days": 20.1,
-      "distance_km": 393225,
-      "diff": null
+      "file": "images/moon_2026-03-08_18.jpg",
+      "phase": "Last Quarter",
+      "phase_icon": "\ud83c\udf17",
+      "phase_meaning": "Half of the Moon is illuminated, fading.",
+      "illumination": 68.5,
+      "age_days": 20.4,
+      "distance_km": 392193,
+      "diff": {
+        "illumination_delta": -9.4,
+        "age_delta": 1.0,
+        "phase_changed": true
+      }
     },
     {
       "date": "2026-03-07",
