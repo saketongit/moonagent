@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-03-16",
-      "file": "images/moon_2026-03-16_00.jpg",
-      "phase": "Waning Crescent",
-      "phase_icon": "\ud83c\udf18",
-      "phase_meaning": "A thin crescent remains before the next New Moon.",
-      "illumination": 4.1,
-      "age_days": 27.6,
-      "distance_km": 365020,
+      "file": "images/moon_2026-03-16_06.jpg",
+      "phase": "New Moon",
+      "phase_icon": "\ud83c\udf11",
+      "phase_meaning": "The Moon is between Earth and Sun, invisible in the sky.",
+      "illumination": 3.1,
+      "age_days": 27.9,
+      "distance_km": 364604,
       "diff": null
     },
     {
