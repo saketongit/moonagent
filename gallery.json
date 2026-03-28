@@ -3,14 +3,18 @@
   "images": [
     {
       "date": "2026-03-28",
-      "file": "images/moon_2026-03-28_12.jpg",
+      "file": "images/moon_2026-03-28_18.jpg",
       "phase": "Waxing Gibbous",
       "phase_icon": "\ud83c\udf14",
       "phase_meaning": "The Moon is mostly lit, approaching fullness.",
-      "illumination": 81.5,
-      "age_days": 10.6,
-      "distance_km": 397705,
-      "diff": null
+      "illumination": 83.5,
+      "age_days": 10.8,
+      "distance_km": 398557,
+      "diff": {
+        "illumination_delta": 8.5,
+        "age_delta": 1.0,
+        "phase_changed": false
+      }
     },
     {
       "date": "2026-03-27",
