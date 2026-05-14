@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-05-14",
-      "file": "images/moon_2026-05-14_00.jpg",
-      "phase": "Waning Crescent",
-      "phase_icon": "\ud83c\udf18",
-      "phase_meaning": "A thin crescent remains before the next New Moon.",
-      "illumination": 4.3,
-      "age_days": 27.6,
-      "distance_km": 365130,
+      "file": "images/moon_2026-05-14_06.jpg",
+      "phase": "New Moon",
+      "phase_icon": "\ud83c\udf11",
+      "phase_meaning": "The Moon is between Earth and Sun, invisible in the sky.",
+      "illumination": 3.3,
+      "age_days": 27.8,
+      "distance_km": 364700,
       "diff": null
     },
     {
