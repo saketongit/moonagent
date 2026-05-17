@@ -3,14 +3,18 @@
   "images": [
     {
       "date": "2026-05-17",
-      "file": "images/moon_2026-05-17_12.jpg",
+      "file": "images/moon_2026-05-17_18.jpg",
       "phase": "New Moon",
       "phase_icon": "\ud83c\udf11",
       "phase_meaning": "The Moon is between Earth and Sun, invisible in the sky.",
-      "illumination": 2.6,
-      "age_days": 1.5,
-      "distance_km": 364405,
-      "diff": null
+      "illumination": 3.5,
+      "age_days": 1.8,
+      "distance_km": 364792,
+      "diff": {
+        "illumination_delta": 2.8,
+        "age_delta": 1.0,
+        "phase_changed": false
+      }
     },
     {
       "date": "2026-05-16",
