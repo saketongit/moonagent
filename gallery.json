@@ -3,14 +3,18 @@
   "images": [
     {
       "date": "2026-05-21",
-      "file": "images/moon_2026-05-21_12.jpg",
+      "file": "images/moon_2026-05-21_18.jpg",
       "phase": "First Quarter",
       "phase_icon": "\ud83c\udf13",
       "phase_meaning": "Half of the Moon is illuminated, growing brighter.",
-      "illumination": 30.8,
-      "age_days": 5.5,
-      "distance_km": 376289,
-      "diff": null
+      "illumination": 33.3,
+      "age_days": 5.8,
+      "distance_km": 377336,
+      "diff": {
+        "illumination_delta": 9.6,
+        "age_delta": 1.0,
+        "phase_changed": true
+      }
     },
     {
       "date": "2026-05-20",
