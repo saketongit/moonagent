@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-05-30",
-      "file": "images/moon_2026-05-30_06.jpg",
+      "file": "images/moon_2026-05-30_12.jpg",
       "phase": "Full Moon",
       "phase_icon": "\ud83c\udf15",
       "phase_meaning": "The Moon\u2019s face is fully illuminated.",
-      "illumination": 99.7,
-      "age_days": 14.3,
-      "distance_km": 405387,
+      "illumination": 99.9,
+      "age_days": 14.5,
+      "distance_km": 405473,
       "diff": null
     },
     {
