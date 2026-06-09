@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-06-09",
-      "file": "images/moon_2026-06-09_06.jpg",
+      "file": "images/moon_2026-06-09_12.jpg",
       "phase": "Waning Crescent",
       "phase_icon": "\ud83c\udf18",
       "phase_meaning": "A thin crescent remains before the next New Moon.",
-      "illumination": 28.1,
-      "age_days": 24.3,
-      "distance_km": 375161,
+      "illumination": 25.7,
+      "age_days": 24.5,
+      "distance_km": 374165,
       "diff": null
     },
     {
