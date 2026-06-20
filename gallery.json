@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-06-20",
-      "file": "images/moon_2026-06-20_00.jpg",
-      "phase": "Waxing Crescent",
-      "phase_icon": "\ud83c\udf12",
-      "phase_meaning": "A thin crescent appears as sunlight slowly returns.",
-      "illumination": 30.5,
-      "age_days": 5.5,
-      "distance_km": 376162,
+      "file": "images/moon_2026-06-20_06.jpg",
+      "phase": "First Quarter",
+      "phase_icon": "\ud83c\udf13",
+      "phase_meaning": "Half of the Moon is illuminated, growing brighter.",
+      "illumination": 33.0,
+      "age_days": 5.7,
+      "distance_km": 377206,
       "diff": null
     },
     {
