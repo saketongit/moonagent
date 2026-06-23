@@ -3,14 +3,18 @@
   "images": [
     {
       "date": "2026-06-23",
-      "file": "images/moon_2026-06-23_06.jpg",
-      "phase": "First Quarter",
-      "phase_icon": "\ud83c\udf13",
-      "phase_meaning": "Half of the Moon is illuminated, growing brighter.",
-      "illumination": 64.3,
-      "age_days": 8.7,
-      "distance_km": 390442,
-      "diff": null
+      "file": "images/moon_2026-06-23_18.jpg",
+      "phase": "Waxing Gibbous",
+      "phase_icon": "\ud83c\udf14",
+      "phase_meaning": "The Moon is mostly lit, approaching fullness.",
+      "illumination": 69.3,
+      "age_days": 9.2,
+      "distance_km": 392554,
+      "diff": {
+        "illumination_delta": 10.2,
+        "age_delta": 1.0,
+        "phase_changed": true
+      }
     },
     {
       "date": "2026-06-22",
