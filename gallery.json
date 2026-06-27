@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-06-27",
-      "file": "images/moon_2026-06-27_06.jpg",
-      "phase": "Waxing Gibbous",
-      "phase_icon": "\ud83c\udf14",
-      "phase_meaning": "The Moon is mostly lit, approaching fullness.",
-      "illumination": 95.5,
-      "age_days": 12.7,
-      "distance_km": 403585,
+      "file": "images/moon_2026-06-27_12.jpg",
+      "phase": "Full Moon",
+      "phase_icon": "\ud83c\udf15",
+      "phase_meaning": "The Moon\u2019s face is fully illuminated.",
+      "illumination": 96.5,
+      "age_days": 13.0,
+      "distance_km": 404025,
       "diff": null
     },
     {
