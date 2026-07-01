@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-07-01",
-      "file": "images/moon_2026-07-01_00.jpg",
-      "phase": "Full Moon",
-      "phase_icon": "\ud83c\udf15",
-      "phase_meaning": "The Moon\u2019s face is fully illuminated.",
-      "illumination": 96.6,
-      "age_days": 16.5,
-      "distance_km": 404083,
+      "file": "images/moon_2026-07-01_06.jpg",
+      "phase": "Waning Gibbous",
+      "phase_icon": "\ud83c\udf16",
+      "phase_meaning": "Light begins to fade after the full Moon.",
+      "illumination": 95.6,
+      "age_days": 16.7,
+      "distance_km": 403651,
       "diff": null
     },
     {
