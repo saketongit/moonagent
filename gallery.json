@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-07-03",
+  "updated_at": "2026-07-04",
   "images": [
+    {
+      "date": "2026-07-04",
+      "file": "images/moon_2026-07-04_00.jpg",
+      "phase": "Waning Gibbous",
+      "phase_icon": "\ud83c\udf16",
+      "phase_meaning": "Light begins to fade after the full Moon.",
+      "illumination": 76.7,
+      "age_days": 19.5,
+      "distance_km": 395678,
+      "diff": null
+    },
     {
       "date": "2026-07-03",
       "file": "images/moon_2026-07-03_18.jpg",
