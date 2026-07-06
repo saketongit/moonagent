@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-07-05",
+  "updated_at": "2026-07-06",
   "images": [
+    {
+      "date": "2026-07-06",
+      "file": "images/moon_2026-07-06_06.jpg",
+      "phase": "Last Quarter",
+      "phase_icon": "\ud83c\udf17",
+      "phase_meaning": "Half of the Moon is illuminated, fading.",
+      "illumination": 54.3,
+      "age_days": 21.7,
+      "distance_km": 386196,
+      "diff": null
+    },
     {
       "date": "2026-07-05",
       "file": "images/moon_2026-07-05_18.jpg",
