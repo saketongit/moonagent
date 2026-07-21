@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-07-20",
+  "updated_at": "2026-07-21",
   "images": [
+    {
+      "date": "2026-07-21",
+      "file": "images/moon_2026-07-21_00.jpg",
+      "phase": "First Quarter",
+      "phase_icon": "\ud83c\udf13",
+      "phase_meaning": "Half of the Moon is illuminated, growing brighter.",
+      "illumination": 45.6,
+      "age_days": 7.0,
+      "distance_km": 382536,
+      "diff": null
+    },
     {
       "date": "2026-07-20",
       "file": "images/moon_2026-07-20_18.jpg",
