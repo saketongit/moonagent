@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-08-16",
-      "file": "images/moon_2026-08-16_06.jpg",
+      "file": "images/moon_2026-08-16_12.jpg",
       "phase": "Waxing Crescent",
       "phase_icon": "\ud83c\udf12",
       "phase_meaning": "A thin crescent appears as sunlight slowly returns.",
-      "illumination": 14.6,
-      "age_days": 3.7,
-      "distance_km": 369464,
+      "illumination": 16.5,
+      "age_days": 3.9,
+      "distance_km": 370278,
       "diff": null
     },
     {
