@@ -3,14 +3,18 @@
   "images": [
     {
       "date": "2026-08-31",
-      "file": "images/moon_2026-08-31_12.jpg",
+      "file": "images/moon_2026-08-31_18.jpg",
       "phase": "Waning Gibbous",
       "phase_icon": "\ud83c\udf16",
       "phase_meaning": "Light begins to fade after the full Moon.",
-      "illumination": 81.6,
-      "age_days": 18.9,
-      "distance_km": 397722,
-      "diff": null
+      "illumination": 79.5,
+      "age_days": 19.2,
+      "distance_km": 396833,
+      "diff": {
+        "illumination_delta": -7.8,
+        "age_delta": 1.0,
+        "phase_changed": false
+      }
     },
     {
       "date": "2026-08-30",
