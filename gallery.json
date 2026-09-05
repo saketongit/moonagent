@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-09-05",
-      "file": "images/moon_2026-09-05_00.jpg",
+      "file": "images/moon_2026-09-05_06.jpg",
       "phase": "Last Quarter",
       "phase_icon": "\ud83c\udf17",
       "phase_meaning": "Half of the Moon is illuminated, fading.",
-      "illumination": 36.5,
-      "age_days": 23.4,
-      "distance_km": 378688,
+      "illumination": 33.9,
+      "age_days": 23.7,
+      "distance_km": 377616,
       "diff": null
     },
     {
