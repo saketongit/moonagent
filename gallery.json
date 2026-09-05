@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-09-05",
-      "file": "images/moon_2026-09-05_06.jpg",
-      "phase": "Last Quarter",
-      "phase_icon": "\ud83c\udf17",
-      "phase_meaning": "Half of the Moon is illuminated, fading.",
-      "illumination": 33.9,
-      "age_days": 23.7,
-      "distance_km": 377616,
+      "file": "images/moon_2026-09-05_12.jpg",
+      "phase": "Waning Crescent",
+      "phase_icon": "\ud83c\udf18",
+      "phase_meaning": "A thin crescent remains before the next New Moon.",
+      "illumination": 31.4,
+      "age_days": 23.9,
+      "distance_km": 376564,
       "diff": null
     },
     {
