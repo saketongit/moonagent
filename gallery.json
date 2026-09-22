@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-09-22",
-      "file": "images/moon_2026-09-22_06.jpg",
+      "file": "images/moon_2026-09-22_12.jpg",
       "phase": "Waxing Gibbous",
       "phase_icon": "\ud83c\udf14",
       "phase_meaning": "The Moon is mostly lit, approaching fullness.",
-      "illumination": 86.0,
-      "age_days": 11.2,
-      "distance_km": 399577,
+      "illumination": 87.8,
+      "age_days": 11.4,
+      "distance_km": 400335,
       "diff": null
     },
     {
