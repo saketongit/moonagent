@@ -3,14 +3,18 @@
   "images": [
     {
       "date": "2026-11-03",
-      "file": "images/moon_2026-11-03_12.jpg",
-      "phase": "Last Quarter",
-      "phase_icon": "\ud83c\udf17",
-      "phase_meaning": "Half of the Moon is illuminated, fading.",
-      "illumination": 32.0,
-      "age_days": 23.9,
-      "distance_km": 376819,
-      "diff": null
+      "file": "images/moon_2026-11-03_18.jpg",
+      "phase": "Waning Crescent",
+      "phase_icon": "\ud83c\udf18",
+      "phase_meaning": "A thin crescent remains before the next New Moon.",
+      "illumination": 29.6,
+      "age_days": 24.1,
+      "distance_km": 375783,
+      "diff": {
+        "illumination_delta": -12.7,
+        "age_delta": 1.2,
+        "phase_changed": true
+      }
     },
     {
       "date": "2026-11-02",
