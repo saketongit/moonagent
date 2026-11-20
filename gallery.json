@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-11-19",
+  "updated_at": "2026-11-20",
   "images": [
+    {
+      "date": "2026-11-20",
+      "file": "images/moon_2026-11-20_00.jpg",
+      "phase": "Waxing Gibbous",
+      "phase_icon": "\ud83c\udf14",
+      "phase_meaning": "The Moon is mostly lit, approaching fullness.",
+      "illumination": 83.6,
+      "age_days": 10.8,
+      "distance_km": 398574,
+      "diff": null
+    },
     {
       "date": "2026-11-19",
       "file": "images/moon_2026-11-19_12.jpg",
