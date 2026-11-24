@@ -3,13 +3,13 @@
   "images": [
     {
       "date": "2026-11-24",
-      "file": "images/moon_2026-11-24_00.jpg",
+      "file": "images/moon_2026-11-24_12.jpg",
       "phase": "Full Moon",
       "phase_icon": "\ud83c\udf15",
       "phase_meaning": "The Moon\u2019s face is fully illuminated.",
-      "illumination": 100.0,
-      "age_days": 14.8,
-      "distance_km": 405497,
+      "illumination": 99.6,
+      "age_days": 15.3,
+      "distance_km": 405340,
       "diff": null
     },
     {
